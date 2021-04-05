@@ -108,17 +108,17 @@ class _DetailsSheetState extends State<DetailsSheet> {
         ),
         Container(
             height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             child: ListView.builder(
-              shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: productData.length,
               itemBuilder: (BuildContext context, int i) => Card(
                 child: Container(
-                  //width: 160.0,
+                  width: MediaQuery.of(context).size.width,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
+                      Text('glider name, swipey swipe'),
                       DataTable(),
                       Text('https://sgdfgdgd/jdkjdhj.png/jashdghd'),
                       Text('20'),
