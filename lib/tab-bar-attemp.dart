@@ -11,8 +11,15 @@
 
 //   @override
 //   void initState() {
-//     _tabController = new TabController(length: 3, vsync: this);
 //     super.initState();
+//     _tabController = new TabController(length: 3, vsync: this);
+//     _tabController.addListener(() => setState(() {}));
+//   }
+
+//   @override
+//   void dispose() {
+//     _tabController.dispose();
+//     super.dispose();
 //   }
 
 //   @override

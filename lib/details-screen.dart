@@ -119,13 +119,21 @@ class _DetailsSheetState extends State<DetailsSheet> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text('glider name, swipey swipe'),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Text('battery %'),
+                            Text('time left on battery'),
+                          ],
+                        ),
+                      ),
+                      DataTable(),
                       Expanded(
                         child: CallTabs(),
                       ),
-                      DataTable(),
-                      Text('https://sgdfgdgd/jdkjdhj.png/jashdghd'),
-                      Text('20'),
-                      Text('akhsgdahghsgdh'),
+                      //DataTable(),
                     ],
                   ),
                 ),
@@ -142,22 +150,123 @@ class DataTable extends StatefulWidget {
 }
 
 class _DataTableState extends State<DataTable> {
-  List<String> missions = ['test1', 'test2', 'test3', 'test4', 'test5'];
-  List<String> vmgWptEta = ['test1', 'test2', 'test3', 'test4', 'test5'];
-  List<String> callTimes = ['test1', 'test2', 'test3', 'test4', 'test5'];
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        height: 100,
-        width: 200,
+        height: MediaQuery.of(context).size.width * .4,
+        width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.blueGrey,
           borderRadius: BorderRadius.circular(8),
         ),
       ),
+    );
+  }
+}
+
+class LastCallPlots extends StatefulWidget {
+  @override
+  _LastCallPlotsState createState() => _LastCallPlotsState();
+}
+
+class _LastCallPlotsState extends State<LastCallPlots> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('(Last Call) YO Diag Plot'),
+        Container(
+          height: MediaQuery.of(context).size.width * .4,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        Padding(padding: EdgeInsets.all(8)),
+        Text('(Last Call) Pressure vs. Time'),
+        Container(
+          height: MediaQuery.of(context).size.width * .4,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SecondPrevPlots extends StatefulWidget {
+  @override
+  _SecondPrevPlotsState createState() => _SecondPrevPlotsState();
+}
+
+class _SecondPrevPlotsState extends State<SecondPrevPlots> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('(2nd Previous) YO Diag Plot'),
+        Container(
+          height: MediaQuery.of(context).size.width * .4,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        Padding(padding: EdgeInsets.all(8)),
+        Text('(2nd Previous) Pressure vs. Time'),
+        Container(
+          height: MediaQuery.of(context).size.width * .4,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ThirdPrevPlots extends StatefulWidget {
+  @override
+  _ThirdPrevPlotsState createState() => _ThirdPrevPlotsState();
+}
+
+class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('(3rd Previous) YO Diag Plot'),
+        Container(
+          height: MediaQuery.of(context).size.width * .4,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        Padding(padding: EdgeInsets.all(8)),
+        Text('(3rd Previous) Pressure vs. Time'),
+        Container(
+          height: MediaQuery.of(context).size.width * .4,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -198,10 +307,10 @@ class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
             ),
           ),
           body: TabBarView(
-            children: [
-              Icon(Icons.directions_car),
-              Icon(Icons.directions_transit),
-              Icon(Icons.directions_bike),
+            children: <Widget>[
+              LastCallPlots(),
+              SecondPrevPlots(),
+              ThirdPrevPlots(),
             ],
           ),
         ),
