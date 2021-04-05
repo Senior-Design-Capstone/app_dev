@@ -120,7 +120,7 @@ class _DetailsSheetState extends State<DetailsSheet> {
                     children: <Widget>[
                       Text('glider name, swipey swipe'),
                       Expanded(
-                        child: PeriodTabs(),
+                        child: CallTabs(),
                       ),
                       DataTable(),
                       Text('https://sgdfgdgd/jdkjdhj.png/jashdghd'),
@@ -162,27 +162,40 @@ class _DataTableState extends State<DataTable> {
   }
 }
 
-class PeriodTabs extends StatefulWidget {
+class CallTabs extends StatefulWidget {
   @override
-  _PeriodTabsState createState() => _PeriodTabsState();
+  _CallTabsState createState() => _CallTabsState();
 }
 
-class _PeriodTabsState extends State<PeriodTabs> with TickerProviderStateMixin {
+class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.directions_car)),
-                Tab(icon: Icon(Icons.directions_transit)),
-                Tab(icon: Icon(Icons.directions_bike)),
-              ],
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: Container(
+              color: Colors.white,
+              child: SafeArea(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(),
+                    ),
+                    TabBar(
+                      tabs: [
+                        Tab(text: 'Last Call'),
+                        Tab(text: '2nd Previous'),
+                        Tab(text: '3rd Previous'),
+                      ],
+                      labelColor: Colors.black12,
+                    ),
+                  ],
+                ),
+              ),
             ),
-            title: Text('Tabs Demo'),
           ),
           body: TabBarView(
             children: [
@@ -197,59 +210,36 @@ class _PeriodTabsState extends State<PeriodTabs> with TickerProviderStateMixin {
   }
 }
 
-// class PeriodTabs extends StatefulWidget {
-//   @override
-//   _PeriodTabsState createState() => _PeriodTabsState();
-// }
-
-// class _PeriodTabsState extends State<PeriodTabs> with TickerProviderStateMixin {
-//   TabController _tabController;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _tabController = new TabController(length: 3, vsync: this);
-//   }
-
+// class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
 //   @override
 //   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: ListView(
-//         children: <Widget>[
-//           Container(
-//             decoration: BoxDecoration(color: Colors.blue),
-//             child: TabBar(
-//               controller: _tabController,
+//     return MaterialApp(
+//       home: DefaultTabController(
+//         length: 3,
+//         child: Scaffold(
+//           appBar: AppBar(
+//             bottom: TabBar(
 //               tabs: [
 //                 Tab(
-//                   text: 'session',
+//                   text: 'Last Call',
 //                 ),
 //                 Tab(
-//                   text: '2 hrs',
+//                   text: '2nd Previous',
 //                 ),
 //                 Tab(
-//                   text: '8hrs',
+//                   text: '3rd Previous',
 //                 ),
 //               ],
 //             ),
 //           ),
-//           Expanded(
-//             child: TabBarView(
-//               controller: _tabController,
-//               children: <Widget>[
-//                 Card(
-//                   child: Text('session text'),
-//                 ),
-//                 Card(
-//                   child: Text('2 hrs text'),
-//                 ),
-//                 Card(
-//                   child: Text('8 hrs text'),
-//                 ),
-//               ],
-//             ),
+//           body: TabBarView(
+//             children: [
+//               Icon(Icons.directions_car),
+//               Icon(Icons.directions_transit),
+//               Icon(Icons.directions_bike),
+//             ],
 //           ),
-//         ],
+//         ),
 //       ),
 //     );
 //   }
