@@ -177,7 +177,14 @@ class _LastCallPlotsState extends State<LastCallPlots> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text('(Last Call) YO Diag Plot'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text('(Last Call) YO Diag Plot'),
+            Text('# yos'),
+            Text('%'),
+          ],
+        ),
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
@@ -187,7 +194,13 @@ class _LastCallPlotsState extends State<LastCallPlots> {
           ),
         ),
         Padding(padding: EdgeInsets.all(8)),
-        Text('(Last Call) Pressure vs. Time'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text('(Last Call) Pressure vs. Time'),
+            Text('%'),
+          ],
+        ),
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
@@ -212,7 +225,14 @@ class _SecondPrevPlotsState extends State<SecondPrevPlots> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text('(2nd Previous) YO Diag Plot'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text('(2nd Previous) YO Diag Plot'),
+            Text('# yos'),
+            Text('%'),
+          ],
+        ),
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
@@ -222,7 +242,13 @@ class _SecondPrevPlotsState extends State<SecondPrevPlots> {
           ),
         ),
         Padding(padding: EdgeInsets.all(8)),
-        Text('(2nd Previous) Pressure vs. Time'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text('(2nd Previous) Pressure vs. Time'),
+            Text('%'),
+          ],
+        ),
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
@@ -247,7 +273,14 @@ class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text('(3rd Previous) YO Diag Plot'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text('(3rd Previous) YO Diag Plot'),
+            Text('# yos'),
+            Text('%'),
+          ],
+        ),
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
@@ -257,7 +290,13 @@ class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
           ),
         ),
         Padding(padding: EdgeInsets.all(8)),
-        Text('(3rd Previous) Pressure vs. Time'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text('(3rd Previous) Pressure vs. Time'),
+            Text('%'),
+          ],
+        ),
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
