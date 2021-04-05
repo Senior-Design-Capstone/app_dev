@@ -119,10 +119,13 @@ class _DetailsSheetState extends State<DetailsSheet> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text('glider name, swipey swipe'),
+                      Expanded(
+                        child: PeriodTabs(),
+                      ),
                       DataTable(),
                       Text('https://sgdfgdgd/jdkjdhj.png/jashdghd'),
                       Text('20'),
-                      Text('akhsgdahghsgdh')
+                      Text('akhsgdahghsgdh'),
                     ],
                   ),
                 ),
@@ -158,29 +161,95 @@ class _DataTableState extends State<DataTable> {
     );
   }
 }
-// class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
+
+class PeriodTabs extends StatefulWidget {
+  @override
+  _PeriodTabsState createState() => _PeriodTabsState();
+}
+
+class _PeriodTabsState extends State<PeriodTabs> with TickerProviderStateMixin {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.directions_car)),
+                Tab(icon: Icon(Icons.directions_transit)),
+                Tab(icon: Icon(Icons.directions_bike)),
+              ],
+            ),
+            title: Text('Tabs Demo'),
+          ),
+          body: TabBarView(
+            children: [
+              Icon(Icons.directions_car),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// class PeriodTabs extends StatefulWidget {
+//   @override
+//   _PeriodTabsState createState() => _PeriodTabsState();
+// }
+
+// class _PeriodTabsState extends State<PeriodTabs> with TickerProviderStateMixin {
+//   TabController _tabController;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _tabController = new TabController(length: 3, vsync: this);
+//   }
+
 //   @override
 //   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(
-//         left: 16,
-//         top: 50,
-//       ),
-//       child: SingleChildScrollView(
-//         scrollDirection: Axis.horizontal,
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//           ],
-//         ),
+//     return Scaffold(
+//       body: ListView(
+//         children: <Widget>[
+//           Container(
+//             decoration: BoxDecoration(color: Colors.blue),
+//             child: TabBar(
+//               controller: _tabController,
+//               tabs: [
+//                 Tab(
+//                   text: 'session',
+//                 ),
+//                 Tab(
+//                   text: '2 hrs',
+//                 ),
+//                 Tab(
+//                   text: '8hrs',
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Expanded(
+//             child: TabBarView(
+//               controller: _tabController,
+//               children: <Widget>[
+//                 Card(
+//                   child: Text('session text'),
+//                 ),
+//                 Card(
+//                   child: Text('2 hrs text'),
+//                 ),
+//                 Card(
+//                   child: Text('8 hrs text'),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
 //       ),
 //     );
 //   }
