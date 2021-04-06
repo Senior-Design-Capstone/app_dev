@@ -251,31 +251,3 @@ class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
     );
   }
 }
-
-// class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(
-//         left: 16,
-//         top: 50,
-//       ),
-//       child: SingleChildScrollView(
-//         scrollDirection: Axis.horizontal,
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//             CustomRestaurantCategory(),
-//             SizedBox(width: 12),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
