@@ -207,15 +207,15 @@ class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
   }
 
   String getGliderLat(dynamic glider) {
-    return glider['gps_lat'].toString();
+    return glider['last_surfacing']['gps_lat'].toString();
   }
 
   String getGliderLon(dynamic glider) {
-    return glider['gps_lon'].toString();
+    return glider['last_surfacing']['gps_lon'].toString();
   }
 
   String getGliderGPSTime(dynamic glider) {
-    return glider['gps_timestamp_epoch'].toString();
+    return glider['last_surfacing']['gps_timestamp_epoch'].toString();
   }
 
   int getGliderConnectTime(dynamic glider) {
