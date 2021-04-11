@@ -23,12 +23,12 @@ class Erddap{
 
 class SLAPI{
   static final apiUri = Uri.parse("https://marine.rutgers.edu/cool/data/gliders/api/deployments/?active");
-
+  static final testApiUri = Uri.parse("https://marine.rutgers.edu/cool/data/gliders/api/deployments/");
   static Future<List<dynamic>> fetchGliders() async {
     var result = await http.get(apiUri);
     return json.decode(result.body)['data'];
   }
-
+  
   static String getGliderName(dynamic glider) {
     return glider['glider_name'];
   }

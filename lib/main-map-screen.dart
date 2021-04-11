@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobile_app/classes/glider-list-single.dart';
 import 'package:mobile_app/details-screen.dart';
 import 'widgets/glider-status-info.dart';
 import 'classes/data-retrieval.dart';
+import 'classes/glider-list-single.dart';
 
 // import 'package:intl/intl.dart';
 
@@ -12,6 +14,9 @@ class MainMap extends StatefulWidget {
 }
 
 class _MainMapState extends State<MainMap> {
+
+  GliderList _gliderList = GliderList();
+
   late GoogleMapController mapController;
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
@@ -78,7 +83,7 @@ class _MainMapState extends State<MainMap> {
                         Radius.circular(15.0),
                       ),
                     ),
-                    onPressed: () => print('add refresh here'),
+                    onPressed: () => _gliderList.updateList(),
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     backgroundColor: Colors.white,
                     child: const Icon(
@@ -185,12 +190,22 @@ class ActiveDeploymentsListView extends StatefulWidget {
   _ActiveDeploymentsListViewState createState() =>
       _ActiveDeploymentsListViewState();
 }
-
+//https://medium.com/codechai/switching-widgets-885d9b5b5c6f For switching widgets
 class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
+
+  // final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
+  // late Future<List<dynamic>> gliderList;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   gliderList=SLAPI.fetchGliders(); 
+  // }
+  GliderList _gliderList = GliderList();
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
-      future: SLAPI.fetchGliders(),
+      return FutureBuilder<List<dynamic>>(
+      future: _gliderList.list,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
