@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'glider-list-single.dart';
 
 
 class Erddap{
@@ -62,9 +63,10 @@ class SLAPI{
   }
 
   static String getTimeSinceLastCall(dynamic glider) {
+    GliderList _gliderList = GliderList();
     int msecsCall = glider['last_surfacing']['connect_time_epoch'] * 1000;
     // DateTime lastCallTime = DateTime.fromMillisecondsSinceEpoch(msecsCall);
-    DateTime current = DateTime.now();
+    DateTime current = _gliderList.timeOfLastRefresh;
     String sHours, sMinutes, sSeconds;
     int timeSinceLastCallmsecs = current.millisecondsSinceEpoch - msecsCall;
     int timeSinceLastCallsecs = (timeSinceLastCallmsecs / 1000).truncate();
