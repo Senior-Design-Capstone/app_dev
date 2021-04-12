@@ -83,7 +83,9 @@ class _MainMapState extends State<MainMap> {
                         Radius.circular(15.0),
                       ),
                     ),
-                    onPressed: () => _gliderList.updateList(),
+                    onPressed: (){
+                      setState(() {_gliderList.updateList();});
+                    },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     backgroundColor: Colors.white,
                     child: const Icon(
