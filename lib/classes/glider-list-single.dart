@@ -3,7 +3,7 @@ import 'data-retrieval.dart';
 class GliderList{
   static final GliderList _instance = GliderList._internal();
   factory GliderList() => _instance;
-  
+
   GliderList._internal() {
     _list=SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
@@ -19,5 +19,8 @@ class GliderList{
     _list=SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
     print("Updated");
+  }
+  void updateTime(){
+    _timeOfLastRefresh = DateTime.now();
   } 
 }

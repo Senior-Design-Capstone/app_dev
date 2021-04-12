@@ -5,6 +5,7 @@ import 'package:mobile_app/details-screen.dart';
 import 'widgets/glider-status-info.dart';
 import 'classes/data-retrieval.dart';
 import 'classes/glider-list-single.dart';
+import 'dart:async';
 
 // import 'package:intl/intl.dart';
 
@@ -24,7 +25,14 @@ class _MainMapState extends State<MainMap> {
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-
+  @override
+  void initState(){
+    super.initState();
+    setState(() {
+          const oneSecond = const Duration(seconds: 1);
+          new Timer.periodic(oneSecond, (Timer t) => setState(() {_gliderList.updateTime();}));
+        });
+  }
   // Future<Null> _refresh() {
   //   //ADD REFRESH STUFF
   //   //https://medium.com/codechai/adding-swipe-to-refresh-to-flutter-app-b234534f39a7
