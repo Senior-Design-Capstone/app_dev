@@ -25,6 +25,8 @@ class _MainMapState extends State<MainMap> {
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
+
+  //Comment out if the timer should not be automatically updated
   @override
   void initState(){
     super.initState();
