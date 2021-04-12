@@ -26,7 +26,7 @@ class _MainMapState extends State<MainMap> {
     mapController = controller;
   }
 
-  //Comment out if the timer should not be automatically updated
+  //Add the timer that will automatically update time since last call
   @override
   void initState(){
     super.initState();
@@ -93,6 +93,7 @@ class _MainMapState extends State<MainMap> {
                         Radius.circular(15.0),
                       ),
                     ),
+                    //On press, refreshes the glider list and rebuilds widget
                     onPressed: (){
                       setState(() {_gliderList.updateList();});
                     },
