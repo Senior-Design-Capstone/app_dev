@@ -11,8 +11,6 @@ class Erddap{
     return startTime.toIso8601String().substring(0,14)+"%3A"+startTime.toIso8601String().substring(15,17)+"%3A"+startTime.toIso8601String().substring(18,20)+"Z";
   }
   static Uri getRawUrlFromDeploymentName(String deploymentName){
-    // return "http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Cdepth";
-    // http://slocum-data.marine.rutgers.edu/erddap/tabledap/ru32-20210330T1448-profile-raw-rt.json?time&time%3E=2021-04-06T00%3A00%3A00Z
     // All Data from deployment
     final String erddapUri = "http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Cdepth%2Cm_battery_inst%2Csci_water_pressure";
     // Last Weeks Data from deployment
@@ -29,7 +27,13 @@ class Erddap{
     var result = await http.get(getRawUrlFromDeploymentName(deploymentName));
     // print("Data fetched!");
     // print(json.decode(result.body)['table']['rows']);
-    return json.decode(result.body)['table']['rows'];
+    return json.decode(result.body)['table'];
+  }
+  static List<dynamic> getColumnNames(dynamic dataList){
+    return dataList['columnNames'];
+  }
+  static List<dynamic> getData(dynamic dataList){
+    return dataList['rows'];
   }
 }
 
