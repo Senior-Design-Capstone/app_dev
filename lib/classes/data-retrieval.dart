@@ -4,9 +4,20 @@ import 'glider-list-single.dart';
 
 
 class Erddap{
+  static String getStartTimeString(){
+    DateTime current = DateTime.now();
+    int oneWeekAgo = 7*24*60*60*1000;
+    DateTime startTime = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-oneWeekAgo);
+    return startTime.toIso8601String().substring(0,14)+"%3A"+startTime.toIso8601String().substring(15,17)+"%3A"+startTime.toIso8601String().substring(18,20)+"Z";
+  }
   static Uri getRawUrlFromDeploymentName(String deploymentName){
     // return "http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Cdepth";
-    return Uri.parse("http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Clatitude%2Clongitude%2Cdepth%2Csci_water_pressure");
+    // http://slocum-data.marine.rutgers.edu/erddap/tabledap/ru32-20210330T1448-profile-raw-rt.json?time&time%3E=2021-04-06T00%3A00%3A00Z
+    // All Data from deployment
+    final String erddapUri = "http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Cdepth%2Cm_battery_inst%2Csci_water_pressure";
+    // Last Weeks Data from deployment
+    // final String erddapUri = "http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Cdepth%2Cm_battery_inst%2Csci_water_pressure&time%3E="+getStartTimeString();
+    return Uri.parse(erddapUri);
   }
   static Uri getSciUrlFromDeploymentName(String deploymentName){
     return Uri.parse("http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-sci-rt.json?time%2Cdepth");

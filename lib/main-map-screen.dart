@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_app/classes/glider-list-single.dart';
 import 'package:mobile_app/details-screen.dart';
-import 'widgets/glider-status-info.dart';
+import 'widgets/glider-status-info-widgets.dart';
 import 'classes/data-retrieval.dart';
 import 'classes/glider-list-single.dart';
 import 'dart:async';
