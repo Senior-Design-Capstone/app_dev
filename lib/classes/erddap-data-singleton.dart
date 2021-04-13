@@ -13,8 +13,9 @@ class ErddapDataList{
 
   Map<String,Future<List<dynamic>>> get dataListMap => _dataListMap;
 
-  void updateList() async{
+  void updateMap() async{
     // _dataListMap.clear();
+    print("starting updating ERDDAP data map");
     GliderList _gliderList = GliderList();
     List<dynamic> gliderList = await _gliderList.list;
     List<MapEntry<String,Future<List<dynamic>>>> entries = [];
@@ -24,5 +25,6 @@ class ErddapDataList{
       entries.add(toAdd);
     }
     _dataListMap = Map.fromEntries(entries);
+    print("updated Erddap data map");
   }
 }

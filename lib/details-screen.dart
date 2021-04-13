@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'classes/glider-list-single.dart';
 import 'classes/data-retrieval.dart';
+import 'classes/erddap-data-singleton.dart';
 
 class Details extends StatefulWidget {
   @override
@@ -98,7 +99,13 @@ class DetailsSheet extends StatefulWidget {
 
 class _DetailsSheetState extends State<DetailsSheet> {
   GliderList _gliderList = GliderList();
+  ErddapDataList _erddapDataList = ErddapDataList();
   List<String> productData = ['test1', 'test2', 'test3', 'test4', 'test5'];
+  @override
+  void initState(){
+    super.initState();
+    _erddapDataList.updateMap();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -112,6 +119,7 @@ class _DetailsSheetState extends State<DetailsSheet> {
         Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
+            //This is the horizontal listview that has the individual glider data
             child: FutureBuilder<List<dynamic>>(
               future: _gliderList.list,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -152,36 +160,6 @@ class _DetailsSheetState extends State<DetailsSheet> {
                 }
               },
             )
-              // ListView.builder(
-              //   scrollDirection: Axis.horizontal,
-              //   itemCount: productData.length,
-              //   itemBuilder: (BuildContext context, int i) => Card(
-              //     child: Container(
-              //       width: MediaQuery.of(context).size.width,
-              //       child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: <Widget>[
-              //           Text('glider name, swipey swipe'),
-              //           Padding(
-              //             padding: const EdgeInsets.all(10.0),
-              //             child: Row(
-              //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //               children: <Widget>[
-              //                 Text('battery %'),
-              //                 Text('time left on battery'),
-              //               ],
-              //             ),
-              //           ),
-              //           DataTable(),
-              //           Expanded(
-              //             child: CallTabs(),
-              //           ),
-              //           //DataTable(),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // )
           ),
       ],
     );
@@ -193,6 +171,7 @@ class DataTable extends StatefulWidget {
   _DataTableState createState() => _DataTableState();
 }
 
+//I think this is the battery % data table
 class _DataTableState extends State<DataTable> {
   @override
   Widget build(BuildContext context) {
