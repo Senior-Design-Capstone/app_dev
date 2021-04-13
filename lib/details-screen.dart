@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'classes/glider-list-single.dart';
+import 'classes/data-retrieval.dart';
 
 class Details extends StatefulWidget {
   @override
@@ -95,6 +97,7 @@ class DetailsSheet extends StatefulWidget {
 }
 
 class _DetailsSheetState extends State<DetailsSheet> {
+  GliderList _gliderList = GliderList();
   List<String> productData = ['test1', 'test2', 'test3', 'test4', 'test5'];
   @override
   Widget build(BuildContext context) {
@@ -109,36 +112,77 @@ class _DetailsSheetState extends State<DetailsSheet> {
         Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: productData.length,
-              itemBuilder: (BuildContext context, int i) => Card(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text('glider name, swipey swipe'),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
+            child: FutureBuilder<List<dynamic>>(
+              future: _gliderList.list,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData){
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) => Card(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Text('battery %'),
-                            Text('time left on battery'),
+                            Text(SLAPI.getGliderName(snapshot.data[index])),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Text('battery %'),
+                                  Text('time left on battery'),
+                                ],
+                              ),
+                            ),
+                            DataTable(),
+                            Expanded(
+                              child: CallTabs(),
+                            ),
+                            //DataTable(),
                           ],
                         ),
                       ),
-                      DataTable(),
-                      Expanded(
-                        child: CallTabs(),
-                      ),
-                      //DataTable(),
-                    ],
-                  ),
-                ),
-              ),
-            )),
+                    ),
+                  );
+                }
+                else{
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            )
+              // ListView.builder(
+              //   scrollDirection: Axis.horizontal,
+              //   itemCount: productData.length,
+              //   itemBuilder: (BuildContext context, int i) => Card(
+              //     child: Container(
+              //       width: MediaQuery.of(context).size.width,
+              //       child: Column(
+              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //         children: <Widget>[
+              //           Text('glider name, swipey swipe'),
+              //           Padding(
+              //             padding: const EdgeInsets.all(10.0),
+              //             child: Row(
+              //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //               children: <Widget>[
+              //                 Text('battery %'),
+              //                 Text('time left on battery'),
+              //               ],
+              //             ),
+              //           ),
+              //           DataTable(),
+              //           Expanded(
+              //             child: CallTabs(),
+              //           ),
+              //           //DataTable(),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // )
+          ),
       ],
     );
   }
