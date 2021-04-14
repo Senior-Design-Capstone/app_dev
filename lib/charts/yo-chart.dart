@@ -14,8 +14,8 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     ErddapDataList _erddapDataList = ErddapDataList();
-//     Map<String,List<dynamic>> dataListMap = _erddapDataList.dataListMap;
-//     List<dynamic> future = dataListMap[this.deploymentName]!;
+//     Map<String,Future<Map<String,dynamic>>> dataListMap = _erddapDataList.dataListMap;
+//     Future<Map<String,dynamic>> future = dataListMap[this.deploymentName]!;
 //     return Scaffold(
 //       appBar: AppBar(
 //         title: Text('Glider YO-Plot'),

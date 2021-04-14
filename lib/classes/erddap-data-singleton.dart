@@ -6,22 +6,22 @@ class ErddapDataList{
   factory ErddapDataList() => _instance;
 
   ErddapDataList._internal() {
-    _dataListMap = Map();
+    _dataListMap = Map<String,Future<Map<String,dynamic>>>();
   }
   
-  late Map<String,Future<List<dynamic>>> _dataListMap;
+  late Map<String,Future<Map<String,dynamic>>> _dataListMap;
 
-  Map<String,Future<List<dynamic>>> get dataListMap => _dataListMap;
+  Map<String,Future<Map<String,dynamic>>> get dataListMap => _dataListMap;
 
   void updateMap() async{
     // _dataListMap.clear();
     print("starting updating ERDDAP data map");
     GliderList _gliderList = GliderList();
     List<dynamic> gliderList = await _gliderList.list;
-    List<MapEntry<String,Future<List<dynamic>>>> entries = [];
+    List<MapEntry<String,Future<Map<String,dynamic>>>> entries = [];
     for(var i=0;i<gliderList.length;i++){
       String deploymentName = SLAPI.getDeploymentName(gliderList[i]);
-      MapEntry<String,Future<List<dynamic>>> toAdd = MapEntry(deploymentName,Erddap.fetchData(deploymentName));
+      MapEntry<String,Future<Map<String,dynamic>>> toAdd = MapEntry<String,Future<Map<String,dynamic>>>(deploymentName,Erddap.fetchData(deploymentName));
       entries.add(toAdd);
     }
     _dataListMap = Map.fromEntries(entries);

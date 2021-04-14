@@ -21,7 +21,8 @@ class Erddap{
     return Uri.parse("http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-sci-rt.json?time%2Cdepth");
   }
   //create a future list from deploymentname
-  static Future<List<dynamic>> fetchData(String deploymentName) async {
+  //change this from a map to two or 4 lists
+  static Future<Map<String,dynamic>> fetchData(String deploymentName) async {
     // print(deploymentName);
     // print("Fetching data...");
     var result = await http.get(getRawUrlFromDeploymentName(deploymentName));
