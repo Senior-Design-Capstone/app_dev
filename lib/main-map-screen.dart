@@ -154,9 +154,17 @@ class CustomInnerContent extends StatelessWidget {
         ActiveDeploymentsTitle(),
         Row(
           children: <Widget>[
-            Text('Last Refresh: '),
-            Text(DateFormat('MM-dd HH:mm')
-                .format(_gliderList.timeOfLastRefresh)),
+            Text(
+              'Last Refresh: ',
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+            Text(
+              DateFormat('MM-dd HH:mm').format(_gliderList.timeOfLastRefresh),
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
+              ),
+            ),
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ),
@@ -197,7 +205,8 @@ class ActiveDeploymentsTitle extends StatelessWidget {
           "Active Deployments",
           style: TextStyle(
             fontSize: 25,
-            color: Colors.black45,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],
