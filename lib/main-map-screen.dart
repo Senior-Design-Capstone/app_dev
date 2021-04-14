@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_app/classes/glider-list-single.dart';
 import 'package:mobile_app/details-screen.dart';
 import 'widgets/glider-status-info-widgets.dart';
@@ -15,7 +16,6 @@ class MainMap extends StatefulWidget {
 }
 
 class _MainMapState extends State<MainMap> {
-
   GliderList _gliderList = GliderList();
 
   late GoogleMapController mapController;
@@ -28,17 +28,17 @@ class _MainMapState extends State<MainMap> {
 
   //Add the timer that will automatically update time since last call
   @override
-  void initState(){
+  void initState() {
     super.initState();
     setState(() {
-          const oneSecond = const Duration(seconds: 1);
-          new Timer.periodic(oneSecond, (Timer t) => setState(() {_gliderList.updateTime();}));
-        });
+      const oneSecond = const Duration(seconds: 1);
+      new Timer.periodic(
+          oneSecond,
+          (Timer t) => setState(() {
+                _gliderList.updateTime();
+              }));
+    });
   }
-  // Future<Null> _refresh() {
-  //   //ADD REFRESH STUFF
-  //   //https://medium.com/codechai/adding-swipe-to-refresh-to-flutter-app-b234534f39a7
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +50,6 @@ class _MainMapState extends State<MainMap> {
       ),
       body: Stack(
         children: <Widget>[
-          // RefreshIndicator(
-          //   child: child,
-          //   onRefresh: _refresh,
-          // ),
           GoogleMap(
             initialCameraPosition: CameraPosition(
               target: _center,
@@ -94,8 +90,10 @@ class _MainMapState extends State<MainMap> {
                       ),
                     ),
                     //On press, refreshes the glider list and rebuilds widget
-                    onPressed: (){
-                      setState(() {_gliderList.updateList();});
+                    onPressed: () {
+                      setState(() {
+                        _gliderList.updateList();
+                      });
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     backgroundColor: Colors.white,
@@ -145,6 +143,7 @@ class CustomScrollViewContent extends StatelessWidget {
 }
 
 class CustomInnerContent extends StatelessWidget {
+  GliderList _gliderList = GliderList();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -153,6 +152,14 @@ class CustomInnerContent extends StatelessWidget {
         DraggingHandle(),
         SizedBox(height: 16),
         ActiveDeploymentsTitle(),
+        Row(
+          children: <Widget>[
+            Text('Last Refresh: '),
+            Text(DateFormat('MM-dd HH:mm')
+                .format(_gliderList.timeOfLastRefresh)),
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
         SizedBox(height: 16),
         ActiveDeploymentsListView(),
         Container(
@@ -203,21 +210,21 @@ class ActiveDeploymentsListView extends StatefulWidget {
   _ActiveDeploymentsListViewState createState() =>
       _ActiveDeploymentsListViewState();
 }
+
 //https://medium.com/codechai/switching-widgets-885d9b5b5c6f For switching widgets
 class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
-
   // final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   // late Future<List<dynamic>> gliderList;
 
   // @override
   // void initState() {
   //   super.initState();
-  //   gliderList=SLAPI.fetchGliders(); 
+  //   gliderList=SLAPI.fetchGliders();
   // }
   GliderList _gliderList = GliderList();
   @override
   Widget build(BuildContext context) {
-      return FutureBuilder<List<dynamic>>(
+    return FutureBuilder<List<dynamic>>(
       future: _gliderList.list,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
@@ -238,9 +245,13 @@ class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
                       child: Row(
                         children: <Widget>[
                           //this is the nameandstatus widget
-                          NameAndStatus(SLAPI.getGliderName(snapshot.data[index]),SLAPI.getGliderSurfaceReason(snapshot.data[index])),
+                          NameAndStatus(
+                              SLAPI.getGliderName(snapshot.data[index]),
+                              SLAPI.getGliderSurfaceReason(
+                                  snapshot.data[index])),
                           //this is the lastcall time widget
-                          LastCallTime(SLAPI.getTimeSinceLastCall(snapshot.data[index])),
+                          LastCallTime(
+                              SLAPI.getTimeSinceLastCall(snapshot.data[index])),
                         ],
                       ),
                     ),

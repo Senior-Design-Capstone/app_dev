@@ -1,11 +1,13 @@
+import 'package:intl/intl.dart';
+
 import 'data-retrieval.dart';
 
-class GliderList{
+class GliderList {
   static final GliderList _instance = GliderList._internal();
   factory GliderList() => _instance;
 
   GliderList._internal() {
-    _list=SLAPI.fetchGliders();
+    _list = SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
   }
 
@@ -17,12 +19,13 @@ class GliderList{
   DateTime get timeOfLastRefresh => _timeOfLastRefresh;
   DateTime get timeCurrent => _timeCurrent;
   // set list(Future<List<dynamic>> value) => list=value;
-  void updateList(){
-    _list=SLAPI.fetchGliders();
+  void updateList() {
+    _list = SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
     print("Updated");
   }
-  void updateTime(){
+
+  void updateTime() {
     _timeCurrent = DateTime.now();
-  } 
+  }
 }
