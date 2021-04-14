@@ -3,10 +3,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/classes/glider-list-single.dart';
 import 'package:mobile_app/details-screen.dart';
+import 'package:mobile_app/widgets/side-menu.dart';
 import 'widgets/glider-status-info-widgets.dart';
 import 'classes/data-retrieval.dart';
 import 'classes/glider-list-single.dart';
 import 'dart:async';
+import 'widgets/side-menu.dart';
 
 // import 'package:intl/intl.dart';
 
@@ -43,6 +45,7 @@ class _MainMapState extends State<MainMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('RU COOL'),
         centerTitle: true,
@@ -53,7 +56,7 @@ class _MainMapState extends State<MainMap> {
           GoogleMap(
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 4.0,
+              zoom: 4.5,
             ),
             zoomGesturesEnabled: true,
             onMapCreated: _onMapCreated,
