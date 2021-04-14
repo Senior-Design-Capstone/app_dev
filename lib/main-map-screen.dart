@@ -20,7 +20,7 @@ class _MainMapState extends State<MainMap> {
 
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(35.376003, -69.916988);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -53,8 +53,9 @@ class _MainMapState extends State<MainMap> {
           GoogleMap(
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 11.0,
+              zoom: 4.0,
             ),
+            zoomGesturesEnabled: true,
             onMapCreated: _onMapCreated,
           ),
           Padding(
@@ -108,8 +109,8 @@ class _MainMapState extends State<MainMap> {
             ),
           ),
           DraggableScrollableSheet(
-            initialChildSize: .1,
-            minChildSize: .1,
+            initialChildSize: .13,
+            minChildSize: .13,
             maxChildSize: .45,
             builder: (BuildContext context, ScrollController scrollController) {
               return Column(
