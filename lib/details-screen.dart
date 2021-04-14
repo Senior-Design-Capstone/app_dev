@@ -146,7 +146,7 @@ class _DetailsSheetState extends State<DetailsSheet> {
                             ),
                             DataTable(),
                             Expanded(
-                              child: CallTabs(),
+                              child: CallTabs(SLAPI.getDeploymentName(snapshot.data[index])),
                             ),
                             //DataTable(),
                           ],
@@ -190,11 +190,15 @@ class _DataTableState extends State<DataTable> {
 }
 
 class LastCallPlots extends StatefulWidget {
+  final String deploymentName;
+  LastCallPlots(this.deploymentName);
   @override
-  _LastCallPlotsState createState() => _LastCallPlotsState();
+  _LastCallPlotsState createState() => _LastCallPlotsState(this.deploymentName);
 }
 
 class _LastCallPlotsState extends State<LastCallPlots> {
+  final String deploymentName;
+  _LastCallPlotsState(this.deploymentName);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -238,11 +242,15 @@ class _LastCallPlotsState extends State<LastCallPlots> {
 }
 
 class SecondPrevPlots extends StatefulWidget {
+  final String deploymentName;
+  SecondPrevPlots(this.deploymentName);
   @override
-  _SecondPrevPlotsState createState() => _SecondPrevPlotsState();
+  _SecondPrevPlotsState createState() => _SecondPrevPlotsState(this.deploymentName);
 }
 
 class _SecondPrevPlotsState extends State<SecondPrevPlots> {
+  final String deploymentName;
+  _SecondPrevPlotsState(this.deploymentName);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -286,11 +294,15 @@ class _SecondPrevPlotsState extends State<SecondPrevPlots> {
 }
 
 class ThirdPrevPlots extends StatefulWidget {
+  final String deploymentName;
+  ThirdPrevPlots(this.deploymentName);
   @override
-  _ThirdPrevPlotsState createState() => _ThirdPrevPlotsState();
+  _ThirdPrevPlotsState createState() => _ThirdPrevPlotsState(this.deploymentName);
 }
 
 class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
+  final String deploymentName;
+  _ThirdPrevPlotsState(this.deploymentName);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -334,11 +346,15 @@ class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
 }
 
 class CallTabs extends StatefulWidget {
+  final String deploymentName;
+  CallTabs(this.deploymentName);
   @override
-  _CallTabsState createState() => _CallTabsState();
+  _CallTabsState createState() => _CallTabsState(this.deploymentName);
 }
 
 class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
+  final String deploymentName;
+  _CallTabsState(this.deploymentName);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -370,9 +386,9 @@ class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
           ),
           body: TabBarView(
             children: <Widget>[
-              LastCallPlots(),
-              SecondPrevPlots(),
-              ThirdPrevPlots(),
+              LastCallPlots(this.deploymentName),
+              SecondPrevPlots(this.deploymentName),
+              ThirdPrevPlots(this.deploymentName),
             ],
           ),
         ),
