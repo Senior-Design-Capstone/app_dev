@@ -74,25 +74,6 @@ class _MainMapState extends State<MainMap> {
                         Radius.circular(15.0),
                       ),
                     ),
-                    onPressed: () => print('add menu stuff here?'),
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    backgroundColor: Colors.white,
-                    child: const Icon(
-                      Icons.menu,
-                      size: 36.0,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                  ),
-                  FloatingActionButton(
-                    heroTag: null,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0),
-                      ),
-                    ),
                     //On press, refreshes the glider list and rebuilds widget
                     onPressed: () {
                       setState(() {
