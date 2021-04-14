@@ -108,13 +108,19 @@ class _MainMapState extends State<MainMap> {
             ),
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.1,
-            minChildSize: 0.10,
-            maxChildSize: 0.45,
+            initialChildSize: .1,
+            minChildSize: .1,
+            maxChildSize: .45,
             builder: (BuildContext context, ScrollController scrollController) {
-              return SingleChildScrollView(
-                controller: scrollController,
-                child: CustomScrollViewContent(),
+              return Column(
+                children: <Widget>[
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: CustomScrollViewContent(),
+                    ),
+                  ),
+                ],
               );
             },
           ),
@@ -133,9 +139,9 @@ class CustomScrollViewContent extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       margin: const EdgeInsets.all(0),
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        // decoration: BoxDecoration(
+        //   borderRadius: BorderRadius.circular(24),
+        // ),
         child: CustomInnerContent(),
       ),
     );
