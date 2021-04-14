@@ -22,19 +22,14 @@ class Erddap{
   }
   //create a future list from deploymentname
   //change this from a map to two or 4 lists
-  static Future<Map<String,dynamic>> fetchData(String deploymentName) async {
+  //CURRENTLY NOT IN USE
+  static Future<List<dynamic>> fetchData(String deploymentName) async {
     // print(deploymentName);
     // print("Fetching data...");
     var result = await http.get(getRawUrlFromDeploymentName(deploymentName));
     // print("Data fetched!");
     // print(json.decode(result.body)['table']['rows']);
-    return json.decode(result.body)['table'];
-  }
-  static List<dynamic> getColumnNames(dynamic dataList){
-    return dataList['columnNames'];
-  }
-  static List<dynamic> getData(dynamic dataList){
-    return dataList['rows'];
+    return json.decode(result.body)['table']['rows'];
   }
 }
 

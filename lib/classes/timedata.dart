@@ -1,6 +1,5 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'data-retrieval.dart';
 
 class TimeData{
   final DateTime date;
@@ -28,16 +27,12 @@ class TimeData{
       start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
     }
     List<TimeData> yoData = [];
-    List<dynamic> columnNames = Erddap.getColumnNames(apiData);
-    List<dynamic> data = Erddap.getData(apiData);
-    int timeInd = columnNames.indexOf('time');
-    int depthInd = columnNames.indexOf('depth');
 
-    for(var i=0;i<data.length;i++){
-      if(data[i][depthInd].toString()!='null'){
-        DateTime dataTime = DateTime.parse(data[i][timeInd]);
+    for(var i=0;i<apiData.length;i++){
+      if(apiData[i][1].toString()!='null'){
+        DateTime dataTime = DateTime.parse(apiData[i][0]);
         if(dataTime.isAfter(start)){
-          yoData.add(new TimeData(dataTime, -data[i][depthInd]));
+          yoData.add(new TimeData(dataTime, -apiData[i][1]));
         }
       }
     }
