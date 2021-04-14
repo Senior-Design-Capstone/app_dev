@@ -77,7 +77,7 @@ class SLAPI{
     GliderList _gliderList = GliderList();
     int msecsCall = glider['last_surfacing']['connect_time_epoch'] * 1000;
     // DateTime lastCallTime = DateTime.fromMillisecondsSinceEpoch(msecsCall);
-    DateTime current = _gliderList.timeOfLastRefresh;
+    DateTime current = _gliderList.timeCurrent;
     String sHours, sMinutes, sSeconds;
     int timeSinceLastCallmsecs = current.millisecondsSinceEpoch - msecsCall;
     int timeSinceLastCallsecs = (timeSinceLastCallmsecs / 1000).truncate();

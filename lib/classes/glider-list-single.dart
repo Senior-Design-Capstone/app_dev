@@ -11,9 +11,11 @@ class GliderList{
 
   late Future<List<dynamic>> _list;
   late DateTime _timeOfLastRefresh;
+  late DateTime _timeCurrent;
 
   Future<List<dynamic>> get list => _list;
   DateTime get timeOfLastRefresh => _timeOfLastRefresh;
+  DateTime get timeCurrent => _timeCurrent;
   // set list(Future<List<dynamic>> value) => list=value;
   void updateList(){
     _list=SLAPI.fetchGliders();
@@ -21,6 +23,6 @@ class GliderList{
     print("Updated");
   }
   void updateTime(){
-    _timeOfLastRefresh = DateTime.now();
+    _timeCurrent = DateTime.now();
   } 
 }

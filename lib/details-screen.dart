@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobile_app/charts/yo-chart.dart';
 import 'classes/glider-list-single.dart';
 import 'classes/data-retrieval.dart';
 import 'classes/erddap-data-singleton.dart';
@@ -215,10 +216,7 @@ class _LastCallPlotsState extends State<LastCallPlots> {
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
-          decoration: BoxDecoration(
-            color: Colors.blueGrey,
-            borderRadius: BorderRadius.circular(8),
-          ),
+          child: YoScatterPlot(this.deploymentName,12),
         ),
         Padding(padding: EdgeInsets.all(8)),
         Row(
@@ -373,9 +371,9 @@ class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
                     ),
                     TabBar(
                       tabs: [
-                        Tab(text: 'Last Call'),
-                        Tab(text: '2nd Previous'),
-                        Tab(text: '3rd Previous'),
+                        Tab(text: 'Last 12 Hours'),
+                        Tab(text: 'Last Day'),
+                        Tab(text: 'Last Week'),
                       ],
                       labelColor: Colors.black12,
                     ),
