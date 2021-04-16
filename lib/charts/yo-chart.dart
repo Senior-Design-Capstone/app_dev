@@ -18,9 +18,6 @@ class YoScatterPlot extends StatelessWidget {
     Map<String,Future<List<dynamic>>> dataMap = _erddapDataList.dataMap;
     Future<List<dynamic>> future = dataMap[this.deploymentName]!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Glider YO-Plot'),
-      ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
           future: future,

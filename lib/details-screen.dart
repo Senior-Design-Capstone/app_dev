@@ -126,6 +126,7 @@ class _DetailsSheetState extends State<DetailsSheet> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData){
                   return ListView.builder(
+                    addAutomaticKeepAlives: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) => Card(
