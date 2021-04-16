@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_app/classes/glider-list-single.dart';
 import 'package:mobile_app/details-screen.dart';
+import 'package:mobile_app/widgets/side-menu.dart';
 import 'widgets/glider-status-info-widgets.dart';
 import 'classes/data-retrieval.dart';
 import 'classes/glider-list-single.dart';
 import 'dart:async';
+import 'widgets/side-menu.dart';
 
 // import 'package:intl/intl.dart';
 
@@ -15,12 +18,11 @@ class MainMap extends StatefulWidget {
 }
 
 class _MainMapState extends State<MainMap> {
-
   GliderList _gliderList = GliderList();
 
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(35.376003, -69.916988);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -28,21 +30,22 @@ class _MainMapState extends State<MainMap> {
 
   //Add the timer that will automatically update time since last call
   @override
-  void initState(){
+  void initState() {
     super.initState();
     setState(() {
-          const oneSecond = const Duration(seconds: 1);
-          new Timer.periodic(oneSecond, (Timer t) => setState(() {_gliderList.updateTime();}));
-        });
+      const oneSecond = const Duration(seconds: 1);
+      new Timer.periodic(
+          oneSecond,
+          (Timer t) => setState(() {
+                _gliderList.updateTime();
+              }));
+    });
   }
-  // Future<Null> _refresh() {
-  //   //ADD REFRESH STUFF
-  //   //https://medium.com/codechai/adding-swipe-to-refresh-to-flutter-app-b234534f39a7
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('RU COOL'),
         centerTitle: true,
@@ -50,15 +53,12 @@ class _MainMapState extends State<MainMap> {
       ),
       body: Stack(
         children: <Widget>[
-          // RefreshIndicator(
-          //   child: child,
-          //   onRefresh: _refresh,
-          // ),
           GoogleMap(
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 11.0,
+              zoom: 4.5,
             ),
+            zoomGesturesEnabled: true,
             onMapCreated: _onMapCreated,
           ),
           Padding(
@@ -74,28 +74,11 @@ class _MainMapState extends State<MainMap> {
                         Radius.circular(15.0),
                       ),
                     ),
-                    onPressed: () => print('add menu stuff here?'),
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    backgroundColor: Colors.white,
-                    child: const Icon(
-                      Icons.menu,
-                      size: 36.0,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                  ),
-                  FloatingActionButton(
-                    heroTag: null,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0),
-                      ),
-                    ),
                     //On press, refreshes the glider list and rebuilds widget
-                    onPressed: (){
-                      setState(() {_gliderList.updateList();});
+                    onPressed: () {
+                      setState(() {
+                        _gliderList.updateList();
+                      });
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     backgroundColor: Colors.white,
@@ -110,13 +93,19 @@ class _MainMapState extends State<MainMap> {
             ),
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.1,
-            minChildSize: 0.10,
-            maxChildSize: 0.45,
+            initialChildSize: .13,
+            minChildSize: .13,
+            maxChildSize: .45,
             builder: (BuildContext context, ScrollController scrollController) {
-              return SingleChildScrollView(
-                controller: scrollController,
-                child: CustomScrollViewContent(),
+              return Column(
+                children: <Widget>[
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: CustomScrollViewContent(),
+                    ),
+                  ),
+                ],
               );
             },
           ),
@@ -135,9 +124,9 @@ class CustomScrollViewContent extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       margin: const EdgeInsets.all(0),
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        // decoration: BoxDecoration(
+        //   borderRadius: BorderRadius.circular(24),
+        // ),
         child: CustomInnerContent(),
       ),
     );
@@ -145,6 +134,7 @@ class CustomScrollViewContent extends StatelessWidget {
 }
 
 class CustomInnerContent extends StatelessWidget {
+  GliderList _gliderList = GliderList();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -153,6 +143,22 @@ class CustomInnerContent extends StatelessWidget {
         DraggingHandle(),
         SizedBox(height: 16),
         ActiveDeploymentsTitle(),
+        Row(
+          children: <Widget>[
+            Text(
+              'Last Refresh: ',
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+            Text(
+              DateFormat('MM-dd HH:mm').format(_gliderList.timeOfLastRefresh),
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
+              ),
+            ),
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
         SizedBox(height: 16),
         ActiveDeploymentsListView(),
         Container(
@@ -190,7 +196,8 @@ class ActiveDeploymentsTitle extends StatelessWidget {
           "Active Deployments",
           style: TextStyle(
             fontSize: 25,
-            color: Colors.black45,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],
@@ -203,21 +210,21 @@ class ActiveDeploymentsListView extends StatefulWidget {
   _ActiveDeploymentsListViewState createState() =>
       _ActiveDeploymentsListViewState();
 }
+
 //https://medium.com/codechai/switching-widgets-885d9b5b5c6f For switching widgets
 class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
-
   // final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   // late Future<List<dynamic>> gliderList;
 
   // @override
   // void initState() {
   //   super.initState();
-  //   gliderList=SLAPI.fetchGliders(); 
+  //   gliderList=SLAPI.fetchGliders();
   // }
   GliderList _gliderList = GliderList();
   @override
   Widget build(BuildContext context) {
-      return FutureBuilder<List<dynamic>>(
+    return FutureBuilder<List<dynamic>>(
       future: _gliderList.list,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
@@ -238,9 +245,13 @@ class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
                       child: Row(
                         children: <Widget>[
                           //this is the nameandstatus widget
-                          NameAndStatus(SLAPI.getGliderName(snapshot.data[index]),SLAPI.getGliderSurfaceReason(snapshot.data[index])),
+                          NameAndStatus(
+                              SLAPI.getGliderName(snapshot.data[index]),
+                              SLAPI.getGliderSurfaceReason(
+                                  snapshot.data[index])),
                           //this is the lastcall time widget
-                          LastCallTime(SLAPI.getTimeSinceLastCall(snapshot.data[index])),
+                          LastCallTime(
+                              SLAPI.getTimeSinceLastCall(snapshot.data[index])),
                         ],
                       ),
                     ),
