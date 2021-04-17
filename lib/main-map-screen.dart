@@ -134,7 +134,7 @@ class CustomScrollViewContent extends StatelessWidget {
 }
 
 class CustomInnerContent extends StatelessWidget {
-  GliderList _gliderList = GliderList();
+  final GliderList _gliderList = GliderList();
   @override
   Widget build(BuildContext context) {
     return Column(

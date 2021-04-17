@@ -46,4 +46,93 @@ class TimeData{
       )
     ];
   }
+  static List<Map<String,Object>> createYoDataSetMap(List<dynamic> apiData,int before){
+    DateTime current = DateTime.now();
+    DateTime start;
+    int msecs;
+    if(before==1){
+      msecs = 1*24*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+    else if(before==12){
+      msecs = 1*12*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+    else{
+      msecs = 7*24*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+
+     List<Map<String,Object>> yoData = [];
+     for(var i=0;i<apiData.length;i++){
+       if(apiData[i][1].toString()!='null'){
+        DateTime dataTime = DateTime.parse(apiData[i][0]);
+        if(dataTime.isAfter(start)){
+          Map<String,Object> toAdd = new Map();
+          toAdd['name'] = dataTime.toIso8601String();
+          toAdd['value'] = -apiData[i][1];
+          yoData.add(toAdd);
+        }
+      }
+     }
+     return yoData;
+  }
+
+  static List<Object> createYoDataSetDates(List<dynamic> apiData,int before){
+    DateTime current = DateTime.now();
+    DateTime start;
+    int msecs;
+    if(before==1){
+      msecs = 1*24*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+    else if(before==12){
+      msecs = 1*12*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+    else{
+      msecs = 7*24*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+
+     List<Object> yoDataDates = [];
+     for(var i=0;i<apiData.length;i++){
+       if(apiData[i][1].toString()!='null'){
+        DateTime dataTime = DateTime.parse(apiData[i][0]);
+        if(dataTime.isAfter(start)){
+          yoDataDates.add(dataTime.toIso8601String());
+        }
+      }
+     }
+     return yoDataDates;
+  }
+
+  static List<Object> createYoDataSetValues(List<dynamic> apiData,int before){
+    DateTime current = DateTime.now();
+    DateTime start;
+    int msecs;
+    if(before==1){
+      msecs = 1*24*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+    else if(before==12){
+      msecs = 1*12*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+    else{
+      msecs = 7*24*60*60*1000;
+      start = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-msecs);
+    }
+
+     List<Object> yoDataValues = [];
+     for(var i=0;i<apiData.length;i++){
+       if(apiData[i][1].toString()!='null'){
+        DateTime dataTime = DateTime.parse(apiData[i][0]);
+        if(dataTime.isAfter(start)){
+          yoDataValues.add(-apiData[i][1]);
+        }
+      }
+     }
+     return yoDataValues;
+  }
 }
