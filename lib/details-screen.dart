@@ -4,6 +4,7 @@ import 'package:mobile_app/charts/yo-chart.dart';
 import 'classes/glider-list-single.dart';
 import 'classes/data-retrieval.dart';
 import 'classes/erddap-data-singleton.dart';
+import 'widgets/chart-listview.dart';
 
 class Details extends StatefulWidget {
   @override
@@ -195,9 +196,18 @@ class LastCallPlots extends StatefulWidget {
   final String deploymentName;
   LastCallPlots(this.deploymentName);
   @override
-  _LastCallPlotsState createState() => _LastCallPlotsState(this.deploymentName);
+  // _LastCallPlotsState createState() => _LastCallPlotsState(this.deploymentName);
+  _LastTwelveHours createState() => _LastTwelveHours(this.deploymentName);
 }
 
+class _LastTwelveHours extends State<LastCallPlots>{
+  final String deploymentName;
+  _LastTwelveHours(this.deploymentName);
+  @override
+  Widget build(BuildContext context){
+    return ChartList(this.deploymentName,12);
+  }
+}
 class _LastCallPlotsState extends State<LastCallPlots> {
   final String deploymentName;
   _LastCallPlotsState(this.deploymentName);
@@ -244,9 +254,17 @@ class SecondPrevPlots extends StatefulWidget {
   final String deploymentName;
   SecondPrevPlots(this.deploymentName);
   @override
-  _SecondPrevPlotsState createState() => _SecondPrevPlotsState(this.deploymentName);
+  _LastDay createState() => _LastDay(this.deploymentName);
 }
 
+class _LastDay extends State<SecondPrevPlots>{
+  final String deploymentName;
+  _LastDay(this.deploymentName);
+  @override
+  Widget build(BuildContext context){
+    return ChartList(this.deploymentName,1);
+  }
+}
 class _SecondPrevPlotsState extends State<SecondPrevPlots> {
   final String deploymentName;
   _SecondPrevPlotsState(this.deploymentName);
@@ -296,9 +314,18 @@ class ThirdPrevPlots extends StatefulWidget {
   final String deploymentName;
   ThirdPrevPlots(this.deploymentName);
   @override
-  _ThirdPrevPlotsState createState() => _ThirdPrevPlotsState(this.deploymentName);
+  _LastWeek createState() => _LastWeek(this.deploymentName);
 }
 
+class _LastWeek extends State<ThirdPrevPlots>{
+  final String deploymentName;
+  _LastWeek(this.deploymentName);
+  @override
+  Widget build(BuildContext context){
+    return ChartList(this.deploymentName,1);
+  }
+}
+//original
 class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
   final String deploymentName;
   _ThirdPrevPlotsState(this.deploymentName);
