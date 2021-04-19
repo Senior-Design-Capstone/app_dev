@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/yo-chart-screen.dart';
-import '../charts/yo-chart.dart';
+// import '../charts/yo-chart.dart';
 import '../yo-chart-screen.dart';
 
 Widget chartList(BuildContext context,String deploymentName,int before){

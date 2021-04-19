@@ -4,6 +4,7 @@ import 'package:mobile_app/charts/yo-chart.dart';
 import 'classes/glider-list-single.dart';
 import 'classes/data-retrieval.dart';
 import 'classes/erddap-data-singleton.dart';
+// import 'yo-chart-screen.dart';
 import 'widgets/chart-listview.dart';
 
 class Details extends StatefulWidget {
@@ -214,6 +215,7 @@ class _LastTwelveHours extends State<LastCallPlots>{
     return chartList(context,this.deploymentName,12);
   }
 }
+// ignore: unused_element
 class _LastCallPlotsState extends State<LastCallPlots> {
   final String deploymentName;
   _LastCallPlotsState(this.deploymentName);
@@ -271,6 +273,7 @@ class _LastDay extends State<SecondPrevPlots>{
     return chartList(context,this.deploymentName,1);
   }
 }
+// ignore: unused_element
 class _SecondPrevPlotsState extends State<SecondPrevPlots> {
   final String deploymentName;
   _SecondPrevPlotsState(this.deploymentName);
@@ -332,6 +335,7 @@ class _LastWeek extends State<ThirdPrevPlots>{
   }
 }
 //original
+// ignore: unused_element
 class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
   final String deploymentName;
   _ThirdPrevPlotsState(this.deploymentName);
@@ -384,13 +388,12 @@ class CallTabs extends StatefulWidget {
   _CallTabsState createState() => _CallTabsState(this.deploymentName);
 }
 
-class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
+class _CallTabsState extends State<CallTabs> {
   final String deploymentName;
   _CallTabsState(this.deploymentName);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
+    return DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: PreferredSize(
@@ -424,8 +427,7 @@ class _CallTabsState extends State<CallTabs> with TickerProviderStateMixin {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
