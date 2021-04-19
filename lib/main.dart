@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MainMap(),
         '/details': (context) => Details(),
-        YoChartScreen.routeName: (context) => YoChartScreen(),
+        '/details/test': (context) => YoChartScreen(),
       },
       initialRoute: '/',
     );

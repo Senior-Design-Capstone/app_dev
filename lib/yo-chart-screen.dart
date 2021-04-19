@@ -7,12 +7,16 @@ class GliderArguments{
   GliderArguments(this.deploymentName,this.before);
 }
 
-class YoChartScreen extends StatelessWidget{
-  static const routeName= '/details/yochart';
+class YoChartScreen extends StatefulWidget{
+  @override
+  _YoChartScreenState createState() => _YoChartScreenState();
+}
+
+class _YoChartScreenState extends State<YoChartScreen> {
   @override
   Widget build(BuildContext context){
     final GliderArguments args =
-      ModalRoute.of(context)!.settings.arguments as GliderArguments;
-    return YoScatterPlot(args.deploymentName,args.before);
+    ModalRoute.of(context)!.settings.arguments as GliderArguments;
+    return YoScatterPlot(args.deploymentName, args.before);
   }
 }

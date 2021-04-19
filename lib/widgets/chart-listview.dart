@@ -17,10 +17,14 @@ Widget chartList(BuildContext context,String deploymentName,int before){
               GestureDetector(
                 onTap: (){
                   if(chartList[index]=='YO Chart'){
-                    Navigator.pushNamed(
+                    Navigator.push(
                       context,
-                      YoChartScreen.routeName,
-                      arguments: GliderArguments(deploymentName,before),
+                      MaterialPageRoute(
+                        builder: (context) => YoChartScreen(),
+                        settings: RouteSettings(
+                          arguments: GliderArguments(deploymentName,before),
+                        ),
+                      ),
                     );
                   }
                   else if(chartList[index]=='Pressure vs. Time'){
