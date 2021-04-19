@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../classes/timedata.dart';
 import '../classes/erddap-data-singleton.dart';
 
+//This is for echarts, did not work
 // class YoScatterPlot extends StatelessWidget {
 //   final String deploymentName;
 //   final int before;

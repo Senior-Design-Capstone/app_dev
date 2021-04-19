@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main-map-screen.dart';
 import 'package:mobile_app/details-screen.dart';
+import 'package:mobile_app/yo-chart-screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MainMap(),
         '/details': (context) => Details(),
+        YoChartScreen.routeName: (context) => YoChartScreen(),
       },
+      initialRoute: '/',
     );
   }
 }

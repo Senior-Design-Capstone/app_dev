@@ -136,7 +136,13 @@ class _DetailsSheetState extends State<DetailsSheet> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Text(SLAPI.getGliderName(snapshot.data[index])),
+                            Text(
+                              SLAPI.getDeploymentName(snapshot.data[index]),
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
@@ -205,7 +211,7 @@ class _LastTwelveHours extends State<LastCallPlots>{
   _LastTwelveHours(this.deploymentName);
   @override
   Widget build(BuildContext context){
-    return ChartList(this.deploymentName,12);
+    return chartList(context,this.deploymentName,12);
   }
 }
 class _LastCallPlotsState extends State<LastCallPlots> {
@@ -262,7 +268,7 @@ class _LastDay extends State<SecondPrevPlots>{
   _LastDay(this.deploymentName);
   @override
   Widget build(BuildContext context){
-    return ChartList(this.deploymentName,1);
+    return chartList(context,this.deploymentName,1);
   }
 }
 class _SecondPrevPlotsState extends State<SecondPrevPlots> {
@@ -322,7 +328,7 @@ class _LastWeek extends State<ThirdPrevPlots>{
   _LastWeek(this.deploymentName);
   @override
   Widget build(BuildContext context){
-    return ChartList(this.deploymentName,1);
+    return chartList(context,this.deploymentName,1);
   }
 }
 //original

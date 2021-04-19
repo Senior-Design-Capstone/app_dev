@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/yo-chart-screen.dart';
 import '../charts/yo-chart.dart';
+import '../yo-chart-screen.dart';
 
-class ChartList extends StatelessWidget{
+Widget chartList(BuildContext context,String deploymentName,int before){
   final List<dynamic> chartList = ['YO Chart','Pressure vs. Time'];
-  final String deploymentName;
-  final int before;
 
-  ChartList(this.deploymentName,this.before);
-
-  @override
-  Widget build(BuildContext context){
     return Scaffold(
       body:Container(
         child: ListView.builder(
@@ -21,10 +17,11 @@ class ChartList extends StatelessWidget{
               GestureDetector(
                 onTap: (){
                   if(chartList[index]=='YO Chart'){
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context)=>new YoScatterPlot(this.deploymentName,this.before))
-                  //    );
+                    Navigator.pushNamed(
+                      context,
+                      YoChartScreen.routeName,
+                      arguments: GliderArguments(deploymentName,before),
+                    );
                   }
                   else if(chartList[index]=='Pressure vs. Time'){
 
@@ -48,5 +45,4 @@ class ChartList extends StatelessWidget{
         )
       )
     );
-  }
 }
