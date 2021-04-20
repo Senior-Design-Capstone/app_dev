@@ -1,5 +1,5 @@
+// @dart=2.9
 import 'package:flutter/cupertino.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'classes/timedata.dart';
 import 'classes/erddap-data-singleton.dart';
@@ -15,10 +15,10 @@ class _PressureChartScreenState extends State<PressureChartScreen> {
   @override
   Widget build(BuildContext context){
     final GliderArguments args =
-    ModalRoute.of(context)!.settings.arguments as GliderArguments;
+    ModalRoute.of(context).settings.arguments as GliderArguments;
     ErddapDataList _erddapDataList = ErddapDataList();
     Map<String,Future<List<dynamic>>> dataMap = _erddapDataList.dataMap;
-    Future<List<dynamic>> future = dataMap[args.deploymentName]!;
+    Future<List<dynamic>> future = dataMap[args.deploymentName];
     return Scaffold(
       appBar: AppBar(
         title: Text('Pressure vs. Time Chart'),

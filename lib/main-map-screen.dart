@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -22,7 +23,7 @@ class _MainMapState extends State<MainMap> {
   GliderList _gliderList = GliderList();
   ErddapDataList _erddapDataList = ErddapDataList();
 
-  late GoogleMapController mapController;
+  GoogleMapController mapController;
 
   final LatLng _center = const LatLng(35.376003, -69.916988);
 

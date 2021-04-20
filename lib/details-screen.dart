@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_app/charts/yo-chart.dart';
@@ -13,7 +14,7 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  late GoogleMapController mapController;
+  GoogleMapController mapController;
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
 
