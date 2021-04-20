@@ -69,10 +69,10 @@ class TimeData{
     List<TimeData> pressureData = [];
 
     for(var i=0;i<apiData.length;i++){
-      if(apiData[i][1].toString()!='null'){
+      if(apiData[i][3].toString()!='null'){
         DateTime dataTime = DateTime.parse(apiData[i][0]);
         if(dataTime.isAfter(start)){
-          pressureData.add(new TimeData(dataTime, -apiData[i][3].toDouble()));
+          pressureData.add(new TimeData(dataTime, apiData[i][3].toDouble()));
         }
       }
     }
