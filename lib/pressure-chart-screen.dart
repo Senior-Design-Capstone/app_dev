@@ -4,20 +4,14 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'classes/timedata.dart';
 import 'classes/erddap-data-singleton.dart';
 import 'package:flutter/material.dart';
+import 'yo-chart-screen.dart';
 
-
-class GliderArguments{
-  final String deploymentName;
-  final int before;
-  GliderArguments(this.deploymentName,this.before);
-}
-
-class YoChartScreen extends StatefulWidget{
+class PressureChartScreen extends StatefulWidget{
   @override
-  _YoChartScreenState createState() => _YoChartScreenState();
+  _PressureChartScreenState createState() => _PressureChartScreenState();
 }
 
-class _YoChartScreenState extends State<YoChartScreen> {
+class _PressureChartScreenState extends State<PressureChartScreen> {
   @override
   Widget build(BuildContext context){
     final GliderArguments args =
@@ -27,7 +21,7 @@ class _YoChartScreenState extends State<YoChartScreen> {
     Future<List<dynamic>> future = dataMap[args.deploymentName]!;
     return Scaffold(
       appBar: AppBar(
-        title: Text('YO Chart'),
+        title: Text('Pressure vs. Time Chart'),
         centerTitle: true,
         backgroundColor: Colors.blue.shade900,
       ),
@@ -37,7 +31,7 @@ class _YoChartScreenState extends State<YoChartScreen> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if(snapshot.hasData){
               return new charts.TimeSeriesChart(
-                TimeData.buildYODataList(snapshot.data,args.before),
+                TimeData.buildPressureDataList(snapshot.data,args.before),
                 animate: false,
                 dateTimeFactory: const charts.LocalDateTimeFactory(),
                 defaultRenderer: 

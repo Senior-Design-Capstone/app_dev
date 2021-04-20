@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/yo-chart-screen.dart';
 // import '../charts/yo-chart.dart';
 import '../yo-chart-screen.dart';
+import '../pressure-chart-screen.dart';
 
 Widget chartList(BuildContext context,String deploymentName,int before){
   final List<dynamic> chartList = ['YO Chart','Pressure vs. Time'];
@@ -28,7 +29,15 @@ Widget chartList(BuildContext context,String deploymentName,int before){
                     );
                   }
                   else if(chartList[index]=='Pressure vs. Time'){
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PressureChartScreen(),
+                        settings: RouteSettings(
+                          arguments: GliderArguments(deploymentName,before),
+                        ),
+                      ),
+                    );
                   }
                   // Navigator.push(
                   //   context,

@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_app/charts/yo-chart.dart';
 import 'classes/glider-list-single.dart';
 import 'classes/data-retrieval.dart';
-import 'classes/erddap-data-singleton.dart';
+// import 'classes/erddap-data-singleton.dart';
 // import 'yo-chart-screen.dart';
 import 'widgets/chart-listview.dart';
 
@@ -102,12 +102,12 @@ class DetailsSheet extends StatefulWidget {
 
 class _DetailsSheetState extends State<DetailsSheet> {
   GliderList _gliderList = GliderList();
-  ErddapDataList _erddapDataList = ErddapDataList();
+  // ErddapDataList _erddapDataList = ErddapDataList();
   List<String> productData = ['test1', 'test2', 'test3', 'test4', 'test5'];
   @override
   void initState(){
     super.initState();
-    _erddapDataList.updateMap();
+    // _erddapDataList.updateMap();
   }
   @override
   Widget build(BuildContext context) {
@@ -331,7 +331,7 @@ class _LastWeek extends State<ThirdPrevPlots>{
   _LastWeek(this.deploymentName);
   @override
   Widget build(BuildContext context){
-    return chartList(context,this.deploymentName,1);
+    return chartList(context,this.deploymentName,7);
   }
 }
 //original

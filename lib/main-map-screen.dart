@@ -9,6 +9,7 @@ import 'classes/data-retrieval.dart';
 import 'classes/glider-list-single.dart';
 import 'dart:async';
 import 'widgets/side-menu.dart';
+import 'package:mobile_app/classes/erddap-data-singleton.dart';
 
 // import 'package:intl/intl.dart';
 
@@ -19,6 +20,7 @@ class MainMap extends StatefulWidget {
 
 class _MainMapState extends State<MainMap> {
   GliderList _gliderList = GliderList();
+  ErddapDataList _erddapDataList = ErddapDataList();
 
   late GoogleMapController mapController;
 
@@ -32,6 +34,7 @@ class _MainMapState extends State<MainMap> {
   @override
   void initState() {
     super.initState();
+    _erddapDataList.updateMap();
     setState(() {
       const oneSecond = const Duration(seconds: 1);
       new Timer.periodic(
