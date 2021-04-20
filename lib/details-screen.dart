@@ -14,9 +14,10 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  GliderList _gliderList = GliderList();
   GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(39.326599999999999, -74.345200000000006);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -44,8 +45,10 @@ class _DetailsState extends State<Details> {
           GoogleMap(
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 11.0,
+              zoom: 4.5,
             ),
+            mapType: MapType.hybrid,
+            markers: _gliderList.markers,
             onMapCreated: _onMapCreated,
           ),
           DraggableScrollableSheet(
