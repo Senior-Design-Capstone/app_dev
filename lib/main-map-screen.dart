@@ -1,4 +1,6 @@
 // @dart=2.9
+// import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -22,10 +24,11 @@ class MainMap extends StatefulWidget {
 class _MainMapState extends State<MainMap> {
   GliderList _gliderList = GliderList();
   ErddapDataList _erddapDataList = ErddapDataList();
-
+  //map stuff
   GoogleMapController mapController;
+  Set<Marker> _markers = Set<Marker>();
 
-  final LatLng _center = const LatLng(35.376003, -69.916988);
+  final LatLng _center = const LatLng(90, 139.287);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -36,6 +39,7 @@ class _MainMapState extends State<MainMap> {
   void initState() {
     super.initState();
     _erddapDataList.updateMap();
+    _markers=_gliderList.markers;
     setState(() {
       const oneSecond = const Duration(seconds: 1);
       new Timer.periodic(
@@ -48,6 +52,7 @@ class _MainMapState extends State<MainMap> {
 
   @override
   Widget build(BuildContext context) {
+  // print(_gliderList.markers);
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
@@ -62,6 +67,8 @@ class _MainMapState extends State<MainMap> {
               target: _center,
               zoom: 4.5,
             ),
+            mapType: MapType.hybrid,
+            markers: _markers,
             zoomGesturesEnabled: true,
             onMapCreated: _onMapCreated,
           ),
