@@ -26,9 +26,8 @@ class _MainMapState extends State<MainMap> {
   ErddapDataList _erddapDataList = ErddapDataList();
   //map stuff
   GoogleMapController mapController;
-  Set<Marker> _markers = Set<Marker>();
 
-  final LatLng _center = const LatLng(90, 139.287);
+  final LatLng _center = const LatLng(39.326599999999999, -74.345200000000006);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -39,7 +38,8 @@ class _MainMapState extends State<MainMap> {
   void initState() {
     super.initState();
     _erddapDataList.updateMap();
-    _markers=_gliderList.markers;
+    print(_gliderList.markers);
+    // _markers=_gliderList.markers;
     setState(() {
       const oneSecond = const Duration(seconds: 1);
       new Timer.periodic(
@@ -68,7 +68,7 @@ class _MainMapState extends State<MainMap> {
               zoom: 4.5,
             ),
             mapType: MapType.hybrid,
-            markers: _markers,
+            markers: _gliderList.markers,
             zoomGesturesEnabled: true,
             onMapCreated: _onMapCreated,
           ),

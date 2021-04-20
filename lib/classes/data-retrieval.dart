@@ -54,11 +54,11 @@ class SLAPI{
   }
 
   static String getGliderLat(dynamic glider) {
-    return glider['last_surfacing']['gps_lat'].toString();
+    return glider['last_surfacing']['gps_lat_degrees'].toString();
   }
 
   static String getGliderLon(dynamic glider) {
-    return glider['last_surfacing']['gps_lon'].toString();
+    return glider['last_surfacing']['gps_lon_degrees'].toString();
   }
 
   static String getGliderGPSTime(dynamic glider) {

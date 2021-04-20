@@ -48,7 +48,9 @@ class GliderList {
       _markers.add(
         Marker(
           markerId: MarkerId(SLAPI.getGliderId(test[i])),
+          infoWindow: InfoWindow(title: SLAPI.getGliderName(test[i])),
           position: LatLng(lat,lon),
+          visible: true,
         ),
       );
     }
