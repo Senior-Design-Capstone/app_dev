@@ -82,6 +82,7 @@ class _MainMapState extends State<MainMap> {
                     onPressed: () {
                       setState(() {
                         _gliderList.updateList();
+                        _erddapDataList.updateMap();
                       });
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
