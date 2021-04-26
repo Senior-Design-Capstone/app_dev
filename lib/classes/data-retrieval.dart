@@ -41,6 +41,13 @@ class SLAPI{
     return json.decode(result.body)['data'];
   }
   
+  static Future<List<dynamic>> getLineString(String deploymentName) async{
+    String url = "https://marine.rutgers.edu/cool/data/gliders/api/tracks/?deployment="+deploymentName;
+    Uri uri = Uri.parse(url);
+    var result = await http.get(uri);
+    return json.decode(result.body)['features'][0]['geometry']['coordinates'];
+  }
+  
   static String getGliderName(dynamic glider) {
     return glider['glider_name'];
   }

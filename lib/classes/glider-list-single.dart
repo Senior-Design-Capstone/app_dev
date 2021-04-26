@@ -1,6 +1,7 @@
 // import 'package:intl/intl.dart';
 
 // import 'dart:collection';
+import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -16,22 +17,26 @@ class GliderList {
     _list = SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
     updateMarkerList();
+    updatePolylineList();
   }
 
   late Future<List<dynamic>> _list;
   late DateTime _timeOfLastRefresh;
   late DateTime _timeCurrent;
   late Set<Marker> _markers = Set<Marker>();
+  late Set<Polyline> _polylines = Set<Polyline>();
 
   Future<List<dynamic>> get list => _list;
   DateTime get timeOfLastRefresh => _timeOfLastRefresh;
   DateTime get timeCurrent => _timeCurrent;
   Set<Marker> get markers => _markers;
+  Set<Polyline> get polylines => _polylines;
   // set list(Future<List<dynamic>> value) => list=value;
   void updateList() {
     _list = SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
     updateMarkerList();
+    updatePolylineList();
     print("Updated");
   }
 
@@ -55,5 +60,29 @@ class GliderList {
       );
     }
     // print(_markers);
+  }
+
+  void updatePolylineList() async{
+    _polylines = Set<Polyline>();
+    List<dynamic> test = await _list;
+    String deploymentName;
+    List<dynamic> lineString;
+    List<LatLng> latlng;
+    for(var i=0;i<test.length;i++){
+      latlng = [];
+      deploymentName = SLAPI.getDeploymentName(test[i]);
+      lineString = await SLAPI.getLineString(deploymentName);
+      for(var j=0;j<lineString.length;j++){
+         latlng.add(LatLng(lineString[j][0],lineString[j][1]));
+      }
+      _polylines.add(
+        Polyline(
+          polylineId: PolylineId(SLAPI.getGliderId(test[i])),
+          points: latlng,
+          color: Colors.blue,
+          visible: true,
+        ),
+      ); 
+    }
   }
 }
