@@ -16,6 +16,7 @@ class GliderList {
   GliderList._internal() {
     _list = SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
+    _colors = [0,30,60,120,180,210,240,270,300,330];
     updateMarkerList();
     updatePolylineList();
   }
@@ -23,6 +24,7 @@ class GliderList {
   late Future<List<dynamic>> _list;
   late DateTime _timeOfLastRefresh;
   late DateTime _timeCurrent;
+  late List<dynamic> _colors;
   late Set<Marker> _markers = Set<Marker>();
   late Set<Polyline> _polylines = Set<Polyline>();
 
@@ -56,6 +58,7 @@ class GliderList {
           infoWindow: InfoWindow(title: SLAPI.getGliderName(test[i])),
           position: LatLng(lat,lon),
           visible: true,
+          icon: BitmapDescriptor.defaultMarkerWithHue(_colors[i % 10]),
         ),
       );
     }
