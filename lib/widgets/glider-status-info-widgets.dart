@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NameAndStatus extends StatelessWidget{
-  final String gliderName,gliderStatus;
-  NameAndStatus(this.gliderName,this.gliderStatus);
+class NameAndStatus extends StatelessWidget {
+  final String gliderName, gliderStatus;
+  NameAndStatus(this.gliderName, this.gliderStatus);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class NameAndStatus extends StatelessWidget{
               Text(
                 this.gliderStatus,
                 style: TextStyle(
-                  fontSize: 12, 
+                  fontSize: 12,
                   color: Colors.grey,
                 ),
               ),
@@ -40,7 +40,7 @@ class NameAndStatus extends StatelessWidget{
   }
 }
 
-class LastCallTime extends StatelessWidget{
+class LastCallTime extends StatelessWidget {
   final String time;
   LastCallTime(this.time);
 
@@ -60,12 +60,12 @@ class LastCallTime extends StatelessWidget{
           Text(
             'Since last call',
             style: TextStyle(
-                fontSize: 12, 
-                color: Colors.grey,
+              fontSize: 12,
+              color: Colors.grey,
             ),
           ),
         ],
       ),
     );
   }
-}  
+}

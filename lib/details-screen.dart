@@ -115,50 +115,6 @@ class _DetailsSheetState extends State<DetailsSheet> {
     // _erddapDataList.updateMap();
   }
 
-  // Widget dataTable() => DataTable(
-  //       columns: const <DataColumn>[
-  //         DataColumn(
-  //           label:
-  //               Text('Mission', style: TextStyle(fontStyle: FontStyle.italic)),
-  //         ),
-  //         DataColumn(
-  //           label: Text(
-  //             'VMG, Wpt ETA',
-  //             style: TextStyle(fontStyle: FontStyle.italic),
-  //           ),
-  //         ),
-  //         DataColumn(
-  //           label: Text(
-  //             'Since Last Call',
-  //             style: TextStyle(fontStyle: FontStyle.italic),
-  //           ),
-  //         ),
-  //       ],
-  //       rows: const <DataRow>[
-  //         DataRow(
-  //           cells: <DataCell>[
-  //             DataCell(Text('Mohit')),
-  //             DataCell(Text('23')),
-  //             DataCell(Text('test')),
-  //           ],
-  //         ),
-  //         DataRow(
-  //           cells: <DataCell>[
-  //             DataCell(Text('Akshay')),
-  //             DataCell(Text('25')),
-  //             DataCell(Text('Software')),
-  //           ],
-  //         ),
-  //         DataRow(
-  //           cells: <DataCell>[
-  //             DataCell(Text('Deepak')),
-  //             DataCell(Text('29')),
-  //             DataCell(Text('Team Lead ')),
-  //           ],
-  //         ),
-  //       ],
-  //     );
-
   @override
   Widget build(BuildContext context) {
     return Column(
