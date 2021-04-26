@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_app/charts/yo-chart.dart';
 import 'classes/glider-list-single.dart';
 import 'classes/data-retrieval.dart';
+import 'widgets/glider-status-info-widgets.dart';
 // import 'classes/erddap-data-singleton.dart';
 // import 'yo-chart-screen.dart';
 import 'widgets/chart-listview.dart';
@@ -109,20 +110,15 @@ class _DetailsSheetState extends State<DetailsSheet> {
   // ErddapDataList _erddapDataList = ErddapDataList();
   List<String> productData = ['test1', 'test2', 'test3', 'test4', 'test5'];
   @override
-  void initState(){
+  void initState() {
     super.initState();
     // _erddapDataList.updateMap();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Container(
-          height: 5,
-          width: 60,
-          decoration: BoxDecoration(
-              color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
-        ),
         Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -130,7 +126,7 @@ class _DetailsSheetState extends State<DetailsSheet> {
             child: FutureBuilder<List<dynamic>>(
               future: _gliderList.list,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData){
+                if (snapshot.hasData) {
                   return ListView.builder(
                     addAutomaticKeepAlives: true,
                     scrollDirection: Axis.horizontal,
@@ -151,16 +147,65 @@ class _DetailsSheetState extends State<DetailsSheet> {
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text('battery %'),
                                   Text('time left on battery'),
                                 ],
                               ),
                             ),
-                            DataTable(),
+                            Container(
+                              child: DataTable(
+                                columns: const <DataColumn>[
+                                  DataColumn(
+                                    label: Text('Mission',
+                                        style: TextStyle(
+                                            fontStyle: FontStyle.italic)),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'VMG, Wpt ETA',
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Since Last Call',
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
+                                rows: const <DataRow>[
+                                  DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(Text('jasmine')),
+                                      DataCell(Text('21')),
+                                      DataCell(Text('test')),
+                                    ],
+                                  ),
+                                  DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(Text('jman')),
+                                      DataCell(Text('22')),
+                                      DataCell(Text('Software')),
+                                    ],
+                                  ),
+                                  DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(Text('phil')),
+                                      DataCell(Text('19')),
+                                      DataCell(Text('test')),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                             Expanded(
-                              child: CallTabs(SLAPI.getDeploymentName(snapshot.data[index])),
+                              child: CallTabs(SLAPI
+                                  .getDeploymentName(snapshot.data[index])),
                             ),
                             //DataTable(),
                           ],
@@ -168,40 +213,38 @@ class _DetailsSheetState extends State<DetailsSheet> {
                       ),
                     ),
                   );
-                }
-                else{
+                } else {
                   return Center(child: CircularProgressIndicator());
                 }
               },
-            )
-          ),
+            )),
       ],
     );
   }
 }
 
-class DataTable extends StatefulWidget {
-  @override
-  _DataTableState createState() => _DataTableState();
-}
+// class DataTable extends StatefulWidget {
+//   @override
+//   _DataTableState createState() => _DataTableState();
+// }
 
-//I think this is the battery % data table
-class _DataTableState extends State<DataTable> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        height: MediaQuery.of(context).size.width * .4,
-        width: MediaQuery.of(context).size.width * 0.9,
-        decoration: BoxDecoration(
-          color: Colors.blueGrey,
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-    );
-  }
-}
+// //I think this is the battery % data table
+// class _DataTableState extends State<DataTable> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 16),
+//       child: Container(
+//         height: MediaQuery.of(context).size.width * .4,
+//         width: MediaQuery.of(context).size.width * 0.9,
+//         decoration: BoxDecoration(
+//           color: Colors.blueGrey,
+//           borderRadius: BorderRadius.circular(8),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class LastCallPlots extends StatefulWidget {
   final String deploymentName;
@@ -211,14 +254,15 @@ class LastCallPlots extends StatefulWidget {
   _LastTwelveHours createState() => _LastTwelveHours(this.deploymentName);
 }
 
-class _LastTwelveHours extends State<LastCallPlots>{
+class _LastTwelveHours extends State<LastCallPlots> {
   final String deploymentName;
   _LastTwelveHours(this.deploymentName);
   @override
-  Widget build(BuildContext context){
-    return chartList(context,this.deploymentName,12);
+  Widget build(BuildContext context) {
+    return chartList(context, this.deploymentName, 12);
   }
 }
+
 // ignore: unused_element
 class _LastCallPlotsState extends State<LastCallPlots> {
   final String deploymentName;
@@ -239,7 +283,7 @@ class _LastCallPlotsState extends State<LastCallPlots> {
         Container(
           height: MediaQuery.of(context).size.width * .4,
           width: MediaQuery.of(context).size.width * 0.9,
-          child: YoScatterPlot(this.deploymentName,12),
+          child: YoScatterPlot(this.deploymentName, 12),
         ),
         Padding(padding: EdgeInsets.all(8)),
         Row(
@@ -269,14 +313,15 @@ class SecondPrevPlots extends StatefulWidget {
   _LastDay createState() => _LastDay(this.deploymentName);
 }
 
-class _LastDay extends State<SecondPrevPlots>{
+class _LastDay extends State<SecondPrevPlots> {
   final String deploymentName;
   _LastDay(this.deploymentName);
   @override
-  Widget build(BuildContext context){
-    return chartList(context,this.deploymentName,1);
+  Widget build(BuildContext context) {
+    return chartList(context, this.deploymentName, 1);
   }
 }
+
 // ignore: unused_element
 class _SecondPrevPlotsState extends State<SecondPrevPlots> {
   final String deploymentName;
@@ -330,14 +375,15 @@ class ThirdPrevPlots extends StatefulWidget {
   _LastWeek createState() => _LastWeek(this.deploymentName);
 }
 
-class _LastWeek extends State<ThirdPrevPlots>{
+class _LastWeek extends State<ThirdPrevPlots> {
   final String deploymentName;
   _LastWeek(this.deploymentName);
   @override
-  Widget build(BuildContext context){
-    return chartList(context,this.deploymentName,7);
+  Widget build(BuildContext context) {
+    return chartList(context, this.deploymentName, 7);
   }
 }
+
 //original
 // ignore: unused_element
 class _ThirdPrevPlotsState extends State<ThirdPrevPlots> {
@@ -398,40 +444,40 @@ class _CallTabsState extends State<CallTabs> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(kToolbarHeight),
-            child: Container(
-              color: Colors.white,
-              child: SafeArea(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(),
-                    ),
-                    TabBar(
-                      tabs: [
-                        Tab(text: 'Last 12 Hours'),
-                        Tab(text: 'Last Day'),
-                        Tab(text: 'Last Week'),
-                      ],
-                      labelColor: Colors.black12,
-                    ),
-                  ],
-                ),
+      length: 3,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: Container(
+            color: Colors.white,
+            child: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(),
+                  ),
+                  TabBar(
+                    tabs: [
+                      Tab(text: 'Last 12 Hours'),
+                      Tab(text: 'Last Day'),
+                      Tab(text: 'Last Week'),
+                    ],
+                    labelColor: Colors.black12,
+                  ),
+                ],
               ),
             ),
           ),
-          body: TabBarView(
-            children: <Widget>[
-              LastCallPlots(this.deploymentName),
-              SecondPrevPlots(this.deploymentName),
-              ThirdPrevPlots(this.deploymentName),
-            ],
-          ),
         ),
-      );
+        body: TabBarView(
+          children: <Widget>[
+            LastCallPlots(this.deploymentName),
+            SecondPrevPlots(this.deploymentName),
+            ThirdPrevPlots(this.deploymentName),
+          ],
+        ),
+      ),
+    );
   }
 }
 
