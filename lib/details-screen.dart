@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_app/charts/yo-chart.dart';
 import 'classes/glider-list-single.dart';
 import 'classes/data-retrieval.dart';
-import 'widgets/glider-status-info-widgets.dart';
+// import 'widgets/glider-status-info-widgets.dart';
 // import 'classes/erddap-data-singleton.dart';
 // import 'yo-chart-screen.dart';
 import 'widgets/chart-listview.dart';

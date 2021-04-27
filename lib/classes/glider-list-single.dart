@@ -9,6 +9,8 @@ import 'data-retrieval.dart';
 
 import 'dart:async';
 
+import 'marker-icon-generator.dart';
+
 class GliderList {
   static final GliderList _instance = GliderList._internal();
   factory GliderList() => _instance;
@@ -16,7 +18,7 @@ class GliderList {
   GliderList._internal() {
     _list = SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
-    _colors = [0,30,60,120,180,210,240,270,300,330];
+    _colors = [Colors.blue,Colors.red,Colors.cyan,Colors.green,Colors.pink,Colors.teal,Colors.purple,Colors.grey,Colors.amber,Colors.black];
     updateMarkerList();
     updatePolylineList();
   }
@@ -58,7 +60,7 @@ class GliderList {
           infoWindow: InfoWindow(title: SLAPI.getGliderName(test[i])),
           position: LatLng(lat,lon),
           visible: true,
-          icon: BitmapDescriptor.defaultMarkerWithHue(_colors[i % 10]),
+          icon: await MarkerGenerator.createBitmapDescriptorFromIconData(_colors[i%10]),
         ),
       );
     }
