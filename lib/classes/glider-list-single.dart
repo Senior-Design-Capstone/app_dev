@@ -26,7 +26,7 @@ class GliderList {
   late Future<List<dynamic>> _list;
   late DateTime _timeOfLastRefresh;
   late DateTime _timeCurrent;
-  late List<dynamic> _colors;
+  late List<Color> _colors;
   late Set<Marker> _markers = Set<Marker>();
   late Set<Polyline> _polylines = Set<Polyline>();
 
@@ -35,6 +35,7 @@ class GliderList {
   DateTime get timeCurrent => _timeCurrent;
   Set<Marker> get markers => _markers;
   Set<Polyline> get polylines => _polylines;
+  List<Color> get colors => _colors;
   // set list(Future<List<dynamic>> value) => list=value;
   void updateList() {
     _list = SLAPI.fetchGliders();

@@ -15,7 +15,7 @@ class NameAndStatus extends StatelessWidget {
         children: <Widget>[
           Icon(
             Icons.directions_boat_outlined,
-            color: _gliderList.colors[i],
+            color: _gliderList.colors[i%10],
           ),
           Padding(padding: EdgeInsets.all(8)),
           Column(
