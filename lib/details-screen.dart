@@ -145,19 +145,19 @@ class _DetailsSheetState extends State<DetailsSheet> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  // Text('battery %'),
-                                  // Text('time left on battery'),
+                                  Text('battery %'),
+                                  Text('time left on battery'),
                                 ],
                               ),
                             ),
                             Container(
                               child: DataTable(
-                                columns: <DataColumn>[
+                                columns: const <DataColumn>[
                                   DataColumn(
                                     label: Text('Mission',
                                         style: TextStyle(
@@ -165,7 +165,7 @@ class _DetailsSheetState extends State<DetailsSheet> {
                                   ),
                                   DataColumn(
                                     label: Text(
-                                      'Wpt ETA',
+                                      'VMG, Wpt ETA',
                                       style: TextStyle(
                                           fontStyle: FontStyle.italic),
                                     ),
@@ -178,27 +178,26 @@ class _DetailsSheetState extends State<DetailsSheet> {
                                     ),
                                   ),
                                 ],
-                                rows: <DataRow>[
+                                rows: const <DataRow>[
                                   DataRow(
                                     cells: <DataCell>[
-                                      DataCell(Text('no_comms')),
+                                      DataCell(Text('jasmine')),
                                       DataCell(Text('21')),
-                                      DataCell(Text(SLAPI.getTimeSinceLastCall(
-                                          snapshot.data[index]))),
+                                      DataCell(Text('test')),
                                     ],
                                   ),
                                   DataRow(
                                     cells: <DataCell>[
-                                      DataCell(Text('no_comms')),
-                                      DataCell(Text('--')),
-                                      DataCell(Text('--')),
+                                      DataCell(Text('jman')),
+                                      DataCell(Text('22')),
+                                      DataCell(Text('Software')),
                                     ],
                                   ),
                                   DataRow(
                                     cells: <DataCell>[
-                                      DataCell(Text('100_nw')),
-                                      DataCell(Text('--')),
-                                      DataCell(Text('--')),
+                                      DataCell(Text('phil')),
+                                      DataCell(Text('19')),
+                                      DataCell(Text('test')),
                                     ],
                                   ),
                                 ],
