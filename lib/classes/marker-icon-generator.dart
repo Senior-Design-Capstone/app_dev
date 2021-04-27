@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:math';
 import 'dart:ui';
 
@@ -33,7 +32,7 @@ class MarkerGenerator {
     final image = await picture.toImage(_markerSize.round(), _markerSize.round());
     final bytes = await image.toByteData(format: ImageByteFormat.png);
 
-    return BitmapDescriptor.fromBytes(bytes.buffer.asUint8List());
+    return BitmapDescriptor.fromBytes(bytes!.buffer.asUint8List());
   }
 
   /// Paints the icon background
