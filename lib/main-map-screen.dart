@@ -69,6 +69,7 @@ class _MainMapState extends State<MainMap> {
             ),
             mapType: MapType.hybrid,
             markers: _gliderList.markers,
+            polylines: _gliderList.polylines,
             zoomGesturesEnabled: true,
             onMapCreated: _onMapCreated,
           ),

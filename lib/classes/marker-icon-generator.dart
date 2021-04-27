@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MarkerGenerator {
-  static final _markerSize=30;
+  static final _markerSize=60;
   static final double _circleStrokeWidth=_markerSize / 10.0;
   static final double _circleOffset=_markerSize / 2;
   static final double _outlineCircleWidth=_circleOffset - (_circleStrokeWidth / 2);

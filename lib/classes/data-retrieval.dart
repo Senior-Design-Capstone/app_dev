@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'glider-list-single.dart';
@@ -36,9 +37,13 @@ class Erddap{
 class SLAPI{
   static final apiUri = Uri.parse("https://marine.rutgers.edu/cool/data/gliders/api/deployments/?active");
   static final testApiUri = Uri.parse("https://marine.rutgers.edu/cool/data/gliders/api/deployments/");
+  // static Future<List<dynamic>> fetchGliders() async {
+  //   var result = await http.get(apiUri);
+  //   return json.decode(result.body)['data'];
+  // }
   static Future<List<dynamic>> fetchGliders() async {
-    var result = await http.get(apiUri);
-    return json.decode(result.body)['data'];
+    var result = await rootBundle.loadString("lib/assets/testdata.json");
+    return json.decode(result)['data'];
   }
   
   static Future<List<dynamic>> getLineString(String deploymentName) async{
