@@ -7,7 +7,7 @@ import '../yo-chart-screen.dart';
 import '../pressure-chart-screen.dart';
 
 Widget chartList(BuildContext context,String deploymentName,int before){
-  final List<dynamic> chartList = ['YO Chart','Pressure vs. Time'];
+  final List<dynamic> chartList = ['YO Chart','Pressure vs. Time','Salinity vs. Time','Temperature vs. Time'];
 
     return Scaffold(
       body:Container(
