@@ -113,7 +113,7 @@ class TimeData{
         yoData.add(new TimeData(dataTime, -apiData[i][1].toDouble()));
         count++;
       }
-      if(count>400){
+      if(count>500){
         count=0;
         break;
       }
@@ -156,7 +156,7 @@ class TimeData{
         pressureData.add(new TimeData(dataTime, apiData[i][3].toDouble()));
         count++;
       }
-      if(count>400){
+      if(count>500){
         count=0;
         break;
       }
