@@ -1,18 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../classes/glider-list-single.dart';
 
 class NameAndStatus extends StatelessWidget {
   final String gliderName, gliderStatus;
-  NameAndStatus(this.gliderName, this.gliderStatus);
+  final int i;
+  NameAndStatus(this.gliderName, this.gliderStatus,this.i);
 
   @override
   Widget build(BuildContext context) {
+    GliderList _gliderList = GliderList();
     return Expanded(
       child: Row(
         children: <Widget>[
           Icon(
             Icons.directions_boat_outlined,
-            color: Colors.yellow,
+            color: _gliderList.colors[i],
           ),
           Padding(padding: EdgeInsets.all(8)),
           Column(

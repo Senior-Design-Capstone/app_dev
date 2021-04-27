@@ -259,7 +259,8 @@ class _ActiveDeploymentsListViewState extends State<ActiveDeploymentsListView> {
                           //this is the nameandstatus widget
                           NameAndStatus(
                               SLAPI.getGliderName(snapshot.data[index]),
-                              SLAPI.getGliderSurfaceReason(snapshot.data[index])
+                              SLAPI.getGliderSurfaceReason(snapshot.data[index]),
+                              index
                           ),
                           //this is the lastcall time widget
                           LastCallTime(
