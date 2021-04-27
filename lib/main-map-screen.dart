@@ -53,6 +53,7 @@ class _MainMapState extends State<MainMap> {
   @override
   Widget build(BuildContext context) {
   // print(_gliderList.markers);
+  // print("polylines:"+_gliderList.polylines.toString());
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(

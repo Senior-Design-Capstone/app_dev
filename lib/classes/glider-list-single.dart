@@ -69,6 +69,7 @@ class GliderList {
   }
 
   void updatePolylineList() async{
+    print("test, updating polylines");
     _polylines = Set<Polyline>();
     List<dynamic> test = await _list;
     String deploymentName;
@@ -79,16 +80,20 @@ class GliderList {
       deploymentName = SLAPI.getDeploymentName(test[i]);
       lineString = await SLAPI.getLineString(deploymentName);
       for(var j=0;j<lineString.length;j++){
-         latlng.add(LatLng(lineString[j][0],lineString[j][1]));
+        // print("length:"+lineString.length.toString());
+        print("("+lineString[j][0].toString()+","+lineString[j][1].toString()+")");
+        latlng.add(LatLng(lineString[j][1],lineString[j][0]));
       }
       _polylines.add(
         Polyline(
-          polylineId: PolylineId(SLAPI.getGliderId(test[i])),
+          polylineId: PolylineId(SLAPI.getGliderId(test[i])+"1"),
           points: latlng,
-          color: Colors.blue,
+          color: _colors[i%10],
+          width: 1,
           visible: true,
         ),
       ); 
+      print(_polylines);
     }
   }
 }
