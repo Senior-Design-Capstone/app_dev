@@ -40,8 +40,10 @@ dev_dependencies:
   flutter_launcher_icons: "^0.8.0"
 
 flutter_icons:
+  image_path_ios: "lib/assets/icon.png"
+  image_path_android: "lib/assets/icon.png"
   ios: true
-  image_path: "lib/assets/icon.png"
+  android: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
