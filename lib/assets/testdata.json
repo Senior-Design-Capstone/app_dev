@@ -1,6 +1,6 @@
 {
   "type":"Active Deployments",
-  "count":1,
+  "count":3,
   "data":[
     {
     "deployment_id": 517,
@@ -28,7 +28,7 @@
         "surfacing_id": 135221,
         "dsvr_log_id": 137176,
         "glider_id": 92,
-        "connect_time_epoch": 1619491971,
+        "connect_time_epoch": 1619536362,
         "disconnect_time_epoch": 1613415876,
         "call_length_seconds": 555,
         "gps_lat": 3857.5799999999999,
@@ -107,7 +107,7 @@
         "surfacing_id": 117855,
         "dsvr_log_id": 117482,
         "glider_id": 77,
-        "connect_time_epoch": 1619493554,
+        "connect_time_epoch": 1619537813,
         "disconnect_time_epoch": 1559772790,
         "call_length_seconds": 0,
         "gps_lat": 3158.9000000000001,
@@ -186,7 +186,7 @@
         "surfacing_id": 136463,
         "dsvr_log_id": 138476,
         "glider_id": 82,
-        "connect_time_epoch": 1619494116,
+        "connect_time_epoch": 1619535642,
         "disconnect_time_epoch": 1618853151,
         "call_length_seconds": 0,
         "gps_lat": 3919.6019999999999,
