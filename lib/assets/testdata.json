@@ -24,6 +24,7 @@
     "payload_bay": 9646,
     "pumped": 1,
     "last_surfacing": {
+        "wpt_eta": 78.8,
         "surfacing_id": 135221,
         "dsvr_log_id": 137176,
         "glider_id": 92,
@@ -57,7 +58,7 @@
         "segment_warnings": 0,
         "status": null,
         "status_code": null,
-        "surface_reason": "no comms for a while",
+        "surface_reason": "no comms",
         "total_errors": 0,
         "total_oddities": 460,
         "total_warnings": 20,
@@ -102,6 +103,7 @@
       "payload_bay": 9265,
       "pumped": 1,
       "last_surfacing": {
+        "wpt_eta": 44.7,
         "surfacing_id": 117855,
         "dsvr_log_id": 117482,
         "glider_id": 77,
@@ -180,6 +182,7 @@
       "payload_bay": 98,
       "pumped": 1,
       "last_surfacing": {
+        "wpt_eta": 20.3,
         "surfacing_id": 136463,
         "dsvr_log_id": 138476,
         "glider_id": 82,

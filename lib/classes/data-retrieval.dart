@@ -3,24 +3,37 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'glider-list-single.dart';
 
-
-class Erddap{
-  static String getStartTimeString(){
+class Erddap {
+  static String getStartTimeString() {
     DateTime current = DateTime.now();
-    int oneWeekAgo = 7*24*60*60*1000;
-    DateTime startTime = DateTime.fromMillisecondsSinceEpoch(current.millisecondsSinceEpoch-oneWeekAgo);
-    return startTime.toIso8601String().substring(0,14)+"%3A"+startTime.toIso8601String().substring(15,17)+"%3A"+startTime.toIso8601String().substring(18,20)+"Z";
+    int oneWeekAgo = 7 * 24 * 60 * 60 * 1000;
+    DateTime startTime = DateTime.fromMillisecondsSinceEpoch(
+        current.millisecondsSinceEpoch - oneWeekAgo);
+    return startTime.toIso8601String().substring(0, 14) +
+        "%3A" +
+        startTime.toIso8601String().substring(15, 17) +
+        "%3A" +
+        startTime.toIso8601String().substring(18, 20) +
+        "Z";
   }
-  static Uri getRawUrlFromDeploymentName(String deploymentName){
+
+  static Uri getRawUrlFromDeploymentName(String deploymentName) {
     // All Data from deployment
-    final String erddapUri = "http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Cdepth%2Cm_battery_inst%2Csci_water_pressure";
+    final String erddapUri =
+        "http://slocum-data.marine.rutgers.edu/erddap/tabledap/" +
+            deploymentName +
+            "-profile-raw-rt.json?time%2Cdepth%2Cm_battery_inst%2Csci_water_pressure";
     // Last Weeks Data from deployment
     // final String erddapUri = "http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-raw-rt.json?time%2Cdepth%2Cm_battery_inst%2Csci_water_pressure&time%3E="+getStartTimeString();
     return Uri.parse(erddapUri);
   }
-  static Uri getSciUrlFromDeploymentName(String deploymentName){
-    return Uri.parse("http://slocum-data.marine.rutgers.edu/erddap/tabledap/"+deploymentName+"-profile-sci-rt.json?time%2Cdepth");
+
+  static Uri getSciUrlFromDeploymentName(String deploymentName) {
+    return Uri.parse("http://slocum-data.marine.rutgers.edu/erddap/tabledap/" +
+        deploymentName +
+        "-profile-sci-rt.json?time%2Cdepth");
   }
+
   //create a future list from deploymentname
   //change this from a map to two or 4 lists
   //CURRENTLY NOT IN USE
@@ -34,9 +47,11 @@ class Erddap{
   }
 }
 
-class SLAPI{
-  static final apiUri = Uri.parse("https://marine.rutgers.edu/cool/data/gliders/api/deployments/?active");
-  static final testApiUri = Uri.parse("https://marine.rutgers.edu/cool/data/gliders/api/deployments/");
+class SLAPI {
+  static final apiUri = Uri.parse(
+      "https://marine.rutgers.edu/cool/data/gliders/api/deployments/?active");
+  static final testApiUri = Uri.parse(
+      "https://marine.rutgers.edu/cool/data/gliders/api/deployments/");
   // static Future<List<dynamic>> fetchGliders() async {
   //   var result = await http.get(apiUri);
   //   return json.decode(result.body)['data'];
@@ -45,14 +60,16 @@ class SLAPI{
     var result = await rootBundle.loadString("lib/assets/testdata.json");
     return json.decode(result)['data'];
   }
-  
-  static Future<List<dynamic>> getLineString(String deploymentName) async{
-    String url = "https://marine.rutgers.edu/cool/data/gliders/api/tracks/?deployment="+deploymentName;
+
+  static Future<List<dynamic>> getLineString(String deploymentName) async {
+    String url =
+        "https://marine.rutgers.edu/cool/data/gliders/api/tracks/?deployment=" +
+            deploymentName;
     Uri uri = Uri.parse(url);
     var result = await http.get(uri);
     return json.decode(result.body)['features'][0]['geometry']['coordinates'];
   }
-  
+
   static String getGliderName(dynamic glider) {
     return glider['glider_name'];
   }
@@ -83,6 +100,10 @@ class SLAPI{
 
   static String getGliderSurfaceReason(dynamic glider) {
     return glider['last_surfacing']['surface_reason'].toString();
+  }
+
+  static String getWptETA(dynamic glider) {
+    return glider['last_surfacing']['wpt_eta'].toString();
   }
 
   static String getTimeSinceLastCall(dynamic glider) {

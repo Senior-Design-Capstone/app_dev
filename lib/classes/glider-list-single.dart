@@ -18,7 +18,18 @@ class GliderList {
   GliderList._internal() {
     _list = SLAPI.fetchGliders();
     _timeOfLastRefresh = DateTime.now();
-    _colors = [Colors.blue,Colors.red,Colors.cyan,Colors.green,Colors.pink,Colors.teal,Colors.purple,Colors.grey,Colors.amber,Colors.black];
+    _colors = [
+      Colors.red,
+      Colors.blue,
+      Colors.cyan,
+      Colors.green,
+      Colors.pink,
+      Colors.teal,
+      Colors.purple,
+      Colors.grey,
+      Colors.amber,
+      Colors.black
+    ];
     updateMarkerList();
     updatePolylineList();
   }
@@ -49,50 +60,55 @@ class GliderList {
     _timeCurrent = DateTime.now();
   }
 
-  void updateMarkerList() async{
+  void updateMarkerList() async {
     _markers = Set<Marker>();
     List<dynamic> test = await _list;
-    for(var i=0;i<test.length;i++){
+    for (var i = 0; i < test.length; i++) {
       double lat = double.parse(SLAPI.getGliderLat(test[i]));
       double lon = double.parse(SLAPI.getGliderLon(test[i]));
       _markers.add(
         Marker(
           markerId: MarkerId(SLAPI.getGliderId(test[i])),
           infoWindow: InfoWindow(title: SLAPI.getGliderName(test[i])),
-          position: LatLng(lat,lon),
+          position: LatLng(lat, lon),
           visible: true,
-          icon: await MarkerGenerator.createBitmapDescriptorFromIconData(_colors[i%10]),
+          icon: await MarkerGenerator.createBitmapDescriptorFromIconData(
+              _colors[i % 10]),
         ),
       );
     }
     // print(_markers);
   }
 
-  void updatePolylineList() async{
+  void updatePolylineList() async {
     print("test, updating polylines");
     _polylines = Set<Polyline>();
     List<dynamic> test = await _list;
     String deploymentName;
     List<dynamic> lineString;
     List<LatLng> latlng;
-    for(var i=0;i<test.length;i++){
+    for (var i = 0; i < test.length; i++) {
       latlng = [];
       deploymentName = SLAPI.getDeploymentName(test[i]);
       lineString = await SLAPI.getLineString(deploymentName);
-      for(var j=0;j<lineString.length;j++){
+      for (var j = 0; j < lineString.length; j++) {
         // print("length:"+lineString.length.toString());
-        print("("+lineString[j][0].toString()+","+lineString[j][1].toString()+")");
-        latlng.add(LatLng(lineString[j][1],lineString[j][0]));
+        print("(" +
+            lineString[j][0].toString() +
+            "," +
+            lineString[j][1].toString() +
+            ")");
+        latlng.add(LatLng(lineString[j][1], lineString[j][0]));
       }
       _polylines.add(
         Polyline(
-          polylineId: PolylineId(SLAPI.getGliderId(test[i])+"1"),
+          polylineId: PolylineId(SLAPI.getGliderId(test[i]) + "1"),
           points: latlng,
-          color: _colors[i%10],
+          color: _colors[i % 10],
           width: 1,
           visible: true,
         ),
-      ); 
+      );
       print(_polylines);
     }
   }
